@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Attendance Tracker</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    padding:40px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+h1{
+    margin-bottom:25px;
+}
+
+.person{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+.status{
+    width:80px;
+    border:none;
+    border-radius:8px;
+    padding:8px;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.no{
+    background:#dc2626;
+}
+
+.yes{
+    background:#16a34a;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Attendance Tracker</h1>
+
+        <div id="attendanceList"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+const participants =
+JSON.parse(
+    localStorage.getItem("participants")
+) || [];
+
+const attendanceList =
+document.getElementById("attendanceList");
+
+let html = "";
+
+participants.forEach(person => {
+
+    html += `
+    <div class="person">
+
+        <strong>${person.name}</strong>
+
+        <button
+            class="status ${person.present ? 'yes' : 'no'}"
+            onclick="toggleStatus(this)"
+        >
+            ${person.present ? 'YES' : 'NO'}
+        </button>
+
+    </div>
+    `;
+
+});
+
+attendanceList.innerHTML = html;
+
+function toggleStatus(button){
+
+    if(button.innerText === "NO"){
+
+        button.innerText = "YES";
+        button.classList.remove("no");
+        button.classList.add("yes");
+
+    } else {
+
+        button.innerText = "NO";
+        button.classList.remove("yes");
+        button.classList.add("no");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
