@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UGANDS | Upload File</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossoriginht@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Inter,sans-serif;
+    background:#f8fafc;
+    color:#111827;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:80px 20px;
+}
+
+.logo{
+    font-size:40px;
+    font-weight:800;
+    color:#082567;
+    margin-bottom:50px;
+}
+
+.card{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:20px;
+    padding:40px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+h1{
+    margin-bottom:15px;
+}
+
+p{
+    color:#64748b;
+    margin-bottom:30px;
+}
+
+.upload-box{
+    border:2px dashed #cbd5e1;
+    border-radius:16px;
+    padding:50px;
+    text-align:center;
+    background:#f8fafc;
+}
+
+input[type=file]{
+    margin-top:20px;
+}
+
+.file-name{
+    margin-top:20px;
+    font-weight:600;
+    color:#2563eb;
+}
+
+.templates{
+    margin-top:40px;
+}
+
+.template{
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:15px;
+    margin-top:10px;
+    cursor:pointer;
+}
+
+.template:hover{
+    background:#eff6ff;
+    border-color:#2563eb;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 24px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.btn:hover{
+    background:#1d4ed8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+UGANDS
+</div>
+
+<div class="card">
+
+<h1>Upload Your File</h1>
+
+<p>
+Upload an Excel or CSV file and choose how you want to transform your data.
+</p>
+
+<div class="upload-box">
+
+<h3>Select a file</h3>
+
+<input type="file" id="fileInput">
+
+<div id="fileName" class="file-name"></div>
+
+</div>
+
+<div class="templates">
+
+<h2>Choose Template</h2>
+
+<div class="template">
+✅ Attendance Tracker
+</div>
+
+<div class="template">
+📦 Inventory Manager
+</div>
+
+<div class="template">
+📋 Inspection Checklist
+</div>
+
+<div class="template">
+🛠 Maintenance Register
+</div>
+
+</div>
+
+<button class="btn">
+Generate Application
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const fileInput = document.getElementById('fileInput');
+const fileName = document.getElementById('fileName');
+
+fileInput.addEventListener('change', function(){
+
+    if(this.files.length > 0){
+
+        fileName.innerHTML =
+        "Selected file: " +
+        this.files[0].name;
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
