@@ -250,13 +250,21 @@ const output = document.getElementById("output");
 let participants = [];
 let selectedTemplate = "attendance";
 
-const supabaseUrl = "...";
-const supabaseKey = "...";
+const supabaseUrl =
+"https://jrowpoyottntwmpvqaks.supabase.co";
 
-console.log(window.supabase);
+const supabaseKey =
+"sb_publishable_nltzzKx3WVg9i7H90E5duA_sWxne9qN";
 
-//const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+const { createClient } = window.supabase;
 
+const db = createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+console.log(db);
+console.log(typeof db.from);
 
 fileInput.addEventListener("change", function(){
 
@@ -407,6 +415,27 @@ templates.forEach(template => {
 });
 
 templates[0].classList.add("selected");
+
+async function testInsert(){
+
+    const { data, error } = await db
+        .from("apps")
+        .insert([
+            {
+                template: "attendance",
+                data: {
+                    title: "Teste UGANDS"
+                }
+            }
+        ])
+        .select();
+
+    console.log("DATA:", data);
+    console.log("ERROR:", error);
+
+}
+
+testInsert();
 
 </script>
 
