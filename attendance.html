@@ -66,9 +66,62 @@ h1{
 
     <div class="card">
 
-        <h1>Attendance Tracker</h1>
+		<h1 id="pageTitle"></h1>
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+">
+
+    <div style="
+    display:flex;
+    align-items:center;
+    gap:10px;
+    ">
+
+        <strong>Date:</strong>
+
+        <input
+            type="date"
+            id="attendanceDate"
+            style="
+                padding:8px;
+                border:1px solid #ddd;
+                border-radius:8px;
+            "
+        >
+
+    </div>
+
+    <div id="stats"></div>
+
+</div>
 
         <div id="attendanceList"></div>
+		
+		<div style="
+margin-top:25px;
+text-align:right;
+">
+
+    <button
+        id="pdfBtn"
+        style="
+            background:#2563eb;
+            color:white;
+            border:none;
+            padding:12px 20px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:bold;
+        "
+    >
+        Export PDF
+    </button>
+
+</div>
 
     </div>
 
@@ -80,6 +133,15 @@ const participants =
 JSON.parse(
     localStorage.getItem("participants")
 ) || [];
+const appTitle =
+localStorage.getItem("appTitle") ||
+"Attendance Tracker";
+
+const showTotal =
+localStorage.getItem("showTotal") === "true";
+
+const showPresent =
+localStorage.getItem("showPresent") === "true";
 
 const attendanceList =
 document.getElementById("attendanceList");
@@ -107,6 +169,54 @@ participants.forEach(person => {
 
 attendanceList.innerHTML = html;
 
+updateStats();
+
+document.getElementById(
+    "pageTitle"
+).innerText = appTitle;
+
+const today = new Date();
+
+document.getElementById(
+    "attendanceDate"
+).value = today.toISOString().split("T")[0];
+
+let presentCount = 0;
+
+participants.forEach(p => {
+
+    if(p.present){
+        presentCount++;
+    }
+
+});
+
+let statsText = "";
+
+if(showTotal){
+
+    statsText +=
+    `Total: ${participants.length}`;
+
+}
+
+if(showPresent){
+
+    if(statsText !== ""){
+
+        statsText += " | ";
+
+    }
+
+    statsText +=
+    `Present: ${presentCount}`;
+
+}
+
+document.getElementById(
+    "stats"
+).innerHTML = statsText;
+
 function toggleStatus(button){
 
     if(button.innerText === "NO"){
@@ -122,8 +232,39 @@ function toggleStatus(button){
         button.classList.add("no");
 
     }
+	
+	updateStats();
 
 }
+function updateStats(){
+
+    const buttons =
+    document.querySelectorAll(".status");
+
+    let present = 0;
+
+    buttons.forEach(button => {
+
+        if(button.innerText === "YES"){
+            present++;
+        }
+
+    });
+
+    const total = buttons.length;
+
+    document.getElementById("stats").innerHTML =
+        `Total: ${total} | Present: ${present}`;
+
+}
+
+document
+.getElementById("pdfBtn")
+.addEventListener("click", function(){
+
+    window.print();
+
+});
 
 </script>
 
