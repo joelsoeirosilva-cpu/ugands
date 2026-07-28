@@ -86,6 +86,12 @@ input[type=file]{
     border-color:#2563eb;
 }
 
+.template.selected{
+    background:#2563eb;
+    color:white;
+    border-color:#2563eb;
+}
+
 .btn{
     display:inline-block;
     margin-top:30px;
@@ -100,6 +106,21 @@ input[type=file]{
 
 .btn:hover{
     background:#1d4ed8;
+}
+
+.layout{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    margin-top:30px;
+}
+
+@media(max-width:900px){
+
+    .layout{
+        grid-template-columns:1fr;
+    }
+
 }
 </style>
 </head>
@@ -120,6 +141,8 @@ UGANDS
 Upload an Excel or CSV file and choose how you want to transform your data.
 </p>
 
+<div class="layout">
+
 <div class="upload-box">
 
 <h3>Select a file</h3>
@@ -138,23 +161,75 @@ Upload an Excel or CSV file and choose how you want to transform your data.
 
 <h2>Choose Template</h2>
 
-<div class="template">
+<div class="template" data-template="attendance">
 ✅ Attendance Tracker
 </div>
 
-<div class="template">
+<div class="template" data-template="inventory">
 📦 Inventory Manager
 </div>
 
-<div class="template">
+<div class="template" data-template="inspection">
 📋 Inspection Checklist
 </div>
 
-<div class="template">
+<div class="template" data-template="maintenance">
 🛠 Maintenance Register
 </div>
 
+<div style="margin-top:30px;">
+
+    <h2>Options</h2>
+
+    <div style="margin-top:20px;">
+
+        <label>
+            Application Title
+        </label>
+
+        <input
+            type="text"
+            id="appTitle"
+            value="Training Attendance"
+            style="
+                width:100%;
+                padding:12px;
+                margin-top:8px;
+                border:1px solid #ddd;
+                border-radius:10px;
+            "
+        >
+
+    </div>
+
+    <div style="margin-top:20px;">
+
+        <label>
+            <input
+                type="checkbox"
+                id="showTotal"
+                checked
+            >
+            Show Total Attendees
+        </label>
+
+    </div>
+
+    <div style="margin-top:10px;">
+
+        <label>
+            <input
+                type="checkbox"
+                id="showPresent"
+                checked
+            >
+            Show Present Count
+        </label>
+
+    </div>
+
 </div>
+
 
 <button class="btn" id="generateBtn">
 Generate Application
@@ -164,6 +239,8 @@ Generate Application
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 
 const fileInput = document.getElementById("fileInput");
@@ -171,6 +248,15 @@ const selectedFile = document.getElementById("selectedFile");
 const output = document.getElementById("output");
 
 let participants = [];
+let selectedTemplate = "attendance";
+
+const supabaseUrl = "...";
+const supabaseKey = "...";
+
+console.log(window.supabase);
+
+//const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
 
 fileInput.addEventListener("change", function(){
 
@@ -271,10 +357,56 @@ document
         "participants",
         JSON.stringify(participants)
     );
+localStorage.setItem(
+    "selectedTemplate",
+    selectedTemplate
+);
+
+localStorage.setItem(
+    "appTitle",
+    document.getElementById("appTitle").value
+);
+
+localStorage.setItem(
+    "showTotal",
+    document.getElementById("showTotal").checked
+);
+
+localStorage.setItem(
+    "showPresent",
+    document.getElementById("showPresent").checked
+);
 
     window.location.href = "attendance.html";
 
 });
+
+const templates =
+document.querySelectorAll(".template");
+
+templates.forEach(template => {
+
+    template.addEventListener("click", function(){
+
+        templates.forEach(t => {
+            t.classList.remove("selected");
+        });
+
+        this.classList.add("selected");
+
+        selectedTemplate =
+        this.dataset.template;
+
+        console.log(
+            "Selected template:",
+            selectedTemplate
+        );
+
+    });
+
+});
+
+templates[0].classList.add("selected");
 
 </script>
 
