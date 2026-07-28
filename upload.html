@@ -359,33 +359,43 @@ output.innerHTML = html;
 
 document
 .getElementById("generateBtn")
-.addEventListener("click", function(){
+.addEventListener("click", async function(){
 
-    localStorage.setItem(
-        "participants",
-        JSON.stringify(participants)
-    );
-localStorage.setItem(
-    "selectedTemplate",
-    selectedTemplate
-);
+const appData = {
 
-localStorage.setItem(
-    "appTitle",
-    document.getElementById("appTitle").value
-);
+    title:
+        document.getElementById("appTitle").value,
 
-localStorage.setItem(
-    "showTotal",
-    document.getElementById("showTotal").checked
-);
+    participants:
+        participants,
 
-localStorage.setItem(
-    "showPresent",
-    document.getElementById("showPresent").checked
-);
+    showTotal:
+        document.getElementById("showTotal").checked,
 
-    window.location.href = "attendance.html";
+    showPresent:
+        document.getElementById("showPresent").checked
+
+};
+
+const { data, error } = await db
+    .from("apps")
+    .insert([
+        {
+            template: selectedTemplate,
+            data: appData
+        }
+    ])
+    .select();
+	
+if(error){
+
+    console.log(error);
+    alert("Error saving application");
+
+    return;
+}
+
+    window.location.href = 'attendance.html?id=${data[0].id}';
 
 });
 
