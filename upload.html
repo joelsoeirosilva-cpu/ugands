@@ -377,6 +377,7 @@ const appData = {
 
 };
 
+console.log("HERE");
 const { data, error } = await db
     .from("apps")
     .insert([
@@ -387,6 +388,8 @@ const { data, error } = await db
     ])
     .select();
 	
+
+	
 if(error){
 
     console.log(error);
@@ -395,7 +398,12 @@ if(error){
     return;
 }
 
-    window.location.href = 'attendance.html?id=${data[0].id}';
+alert("before redirect");
+
+    window.location.href = `attendance.html?id=${data[0].id}`;
+	
+	alert("after redirect");
+
 
 });
 
