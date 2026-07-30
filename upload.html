@@ -377,7 +377,6 @@ const appData = {
 
 };
 
-console.log("HERE");
 const { data, error } = await db
     .from("apps")
     .insert([
@@ -388,7 +387,18 @@ const { data, error } = await db
     ])
     .select();
 	
+const shareToken = crypto.randomUUID();
 
+const { data, error } = await db
+    .from("apps")
+    .insert([
+        {
+            template: selectedTemplate,
+            data: appData,
+            share_token: shareToken
+        }
+    ])
+    .select();
 	
 if(error){
 
