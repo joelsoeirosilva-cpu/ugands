@@ -137,7 +137,7 @@ const supabaseUrl =
 const supabaseKey =
 "sb_publishable_nltzzKx3WVg9i7H90E5duA_sWxne9qN";
 
-const db = createClient(
+const db = supabase.createClient(
     supabaseUrl,
     supabaseKey
 );
