@@ -161,15 +161,24 @@ const db = supabase.createClient(
 async function loadApplication() {
 
 const params = new URLSearchParams(window.location.search);
+
 const appId = params.get("id");
+const shareToken = params.get("share");
 
 console.log("App ID:", appId);
+console.log("Share Token:", shareToken);
 
-const { data, error } = await db
+let query = db
     .from("apps")
-    .select("*")
-    .eq("id", appId)
-    .single();
+    .select("*");
+
+if (shareToken) {
+    query = query.eq("share_token", shareToken);
+} else {
+    query = query.eq("id", appId);
+}
+
+const { data, error } = await query.single();
 
 if (error) {
     console.log(error);
