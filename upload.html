@@ -397,7 +397,8 @@ if(error){
 
     return;
 }
-    window.location.href = `attendance.html?id=${data[0].id}`;
+window.location.href =
+    `attendance.html?share=${insertedData[0].share_token}`;
 
 
 });
