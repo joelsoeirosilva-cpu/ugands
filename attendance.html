@@ -129,19 +129,30 @@ text-align:right;
 
 <script>
 
-const participants =
-JSON.parse(
-    localStorage.getItem("participants")
-) || [];
-const appTitle =
-localStorage.getItem("appTitle") ||
-"Attendance Tracker";
+async function loadApplication() {
 
-const showTotal =
-localStorage.getItem("showTotal") === "true";
+console.log("App ID:", appId);
 
-const showPresent =
-localStorage.getItem("showPresent") === "true";
+const params = new URLSearchParams(window.location.search);
+const appId = params.get("id");
+
+const { data, error } = await db
+    .from("apps")
+    .select("*")
+    .eq("id", appId)
+    .single();
+
+if (error) {
+    console.log(error);
+    alert("Application not found");
+    return;
+}
+
+const participants = data.data.participants || [];
+const appTitle = data.data.title || "Attendance Tracker";
+const showTotal = data.data.showTotal;
+const showPresent = data.data.showPresent;
+
 
 const attendanceList =
 document.getElementById("attendanceList");
@@ -265,6 +276,9 @@ document
     window.print();
 
 });
+}
+
+loadApplication();
 
 </script>
 
