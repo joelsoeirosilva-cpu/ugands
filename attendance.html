@@ -405,6 +405,18 @@ document
 
 loadApplication();
 
+document
+    .getElementById("shareBtn")
+    .addEventListener("click", async () => {
+
+        const link =
+            `${window.location.origin}${window.location.pathname}?share=${window.currentShareToken}`;
+
+        await navigator.clipboard.writeText(link);
+
+        alert("Link copiado para a área de transferência!");
+    });
+
 </script>
 
 </body>
