@@ -166,6 +166,11 @@ if (error) {
 }
 
 const participants = data.data.participants || [];
+
+participants.sort((a, b) =>
+   a.name.localeCompare(b.name)
+   );
+
 const appTitle = data.data.title || "Attendance Tracker";
 const showTotal = data.data.showTotal;
 const showPresent = data.data.showPresent;
