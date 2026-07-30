@@ -376,16 +376,6 @@ const appData = {
         document.getElementById("showPresent").checked
 
 };
-
-const { data, error } = await db
-    .from("apps")
-    .insert([
-        {
-            template: selectedTemplate,
-            data: appData
-        }
-    ])
-    .select();
 	
 const shareToken = crypto.randomUUID();
 
