@@ -206,8 +206,24 @@ document.getElementById(
 const today = new Date();
 
 document.getElementById(
-    "attendanceDate"
-).value = today.toISOString().split("T")[0];
+  "attendanceDate"
+).value =
+  data.data.attendanceDate ||
+  new Date().toISOString().split("T")[0];
+  
+document
+  .getElementById("attendanceDate")
+  .addEventListener("change", async function() {
+    await db
+      .from("apps")
+      .update({
+        data: {
+          ...data.data,
+          attendanceDate: this.value
+        }
+      })
+      .eq("id", appId);
+  });
 
 let presentCount = 0;
 
