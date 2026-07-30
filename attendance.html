@@ -306,6 +306,31 @@ window.toggleStatus = async function(button, index){
 	updateStats();
 
 }
+document
+  .getElementById("searchInput")
+  .addEventListener("input", function() {
+
+    const searchText =
+      this.value.toLowerCase();
+
+    document
+      .querySelectorAll(".person")
+      .forEach(person => {
+
+        const name =
+          person.querySelector("strong")
+          .innerText
+          .toLowerCase();
+
+        if (name.includes(searchText)) {
+          person.style.display = "";
+        } else {
+          person.style.display = "none";
+        }
+
+      });
+
+  });
 function updateStats(){
 
     const buttons =
