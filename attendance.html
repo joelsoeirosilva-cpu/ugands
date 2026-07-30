@@ -131,10 +131,10 @@ text-align:right;
 
 async function loadApplication() {
 
-console.log("App ID:", appId);
-
 const params = new URLSearchParams(window.location.search);
 const appId = params.get("id");
+
+console.log("App ID:", appId);
 
 const { data, error } = await db
     .from("apps")
