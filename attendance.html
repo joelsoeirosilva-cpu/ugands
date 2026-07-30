@@ -176,7 +176,7 @@ document.getElementById("attendanceList");
 
 let html = "";
 
-participants.forEach(person => {
+participants.forEach(person, index) => {
 
     html += `
     <div class="person">
@@ -185,7 +185,7 @@ participants.forEach(person => {
 
         <button
             class="status ${person.present ? 'yes' : 'no'}"
-            onclick="toggleStatus(this)"
+            onclick="toggleStatus(this, ${index})"
         >
             ${person.present ? 'YES' : 'NO'}
         </button>
@@ -261,21 +261,35 @@ document.getElementById(
     "stats"
 ).innerHTML = statsText;
 
-window.toggleStatus = function(button){
+window.toggleStatus = async function(button, index){
 
     if(button.innerText === "NO"){
 
         button.innerText = "YES";
         button.classList.remove("no");
         button.classList.add("yes");
+		
+		participants[index].present = true;
 
     } else {
 
         button.innerText = "NO";
         button.classList.remove("yes");
         button.classList.add("no");
+		
+		participants[index].present = false;18
 
     }
+	
+	await db
+  .from("apps")
+  .update({
+    data: {
+      ...data.data,
+      participants: participants
+    }
+  })
+  .eq("id", appId);
 	
 	updateStats();
 
