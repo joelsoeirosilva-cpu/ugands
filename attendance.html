@@ -218,8 +218,10 @@ participants.sort((a, b) =>
    );
 
 const appTitle = data.data.title || "Attendance Tracker";
+window.currentShareToken = data.share_token;
 const showTotal = data.data.showTotal;
 const showPresent = data.data.showPresent;
+console.log(window.currentShareToken);
 
 
 const attendanceList =
