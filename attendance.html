@@ -102,8 +102,13 @@ margin-bottom:20px;
 		<input
     type="text"
     id="searchInput"
-    placeholder="Pesquisar participante..."
-    style="display:block; margin:20px auto; width:300px;"
+    placeholder="Find..."
+    oninput="filterParticipants()"
+    style="
+        padding:8px;
+        border:1px solid #ddd;
+        border-radius:8px;
+    "
 >
 
         <div id="attendanceList"></div>
