@@ -455,10 +455,23 @@ if (y > 270) {
 
 doc.setDrawColor(200, 200, 200);
 
+doc.setFillColor(240, 240, 240);
+
+doc.rect(20, y - 8, 160, 12, "F");
+
+doc.setFont(undefined, "bold");
+
 doc.text("Participant", 25, y);
 doc.text("Status", 150, y);
 
-    y += 12;
+doc.setFont(undefined, "normal");
+
+y += 12;
+
+doc.line(20, y, 180, y);
+
+y += 8;
+
 }
 
 
