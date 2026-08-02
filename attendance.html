@@ -427,7 +427,6 @@ document
     doc.text(`Total: ${participants.length}`, 20, 60);
     doc.text(`Present: ${presentCount}`, 20, 70);
 
-    doc.save("attendance-report.pdf");
 	let y = 90;
 
 doc.text("Participants", 20, y);
@@ -445,6 +444,7 @@ participants.forEach(person => {
     y += 10;
 
 });
+    doc.save("attendance-report.pdf");
 
 });
 }
