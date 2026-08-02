@@ -212,13 +212,16 @@ if (error) {
     return;
 }
 
-const participants = data.data.participants || [];
+window.participants = data.data.participants || [];
+const participants = window.participants;
 
 participants.sort((a, b) =>
    a.name.localeCompare(b.name)
    );
 
 const appTitle = data.data.title || "Attendance Tracker";
+window.appTitle = appTitle;
+window.appData = data.data;
 window.currentShareToken = data.share_token;
 const showTotal = data.data.showTotal;
 const showPresent = data.data.showPresent;
@@ -405,13 +408,28 @@ document
 
     const doc = new jsPDF();
 
+    const participants = window.participants || [];
+    const title = window.appTitle || "Attendance Tracker";
+
+    const date =
+        document.getElementById("attendanceDate").value;
+
+    const presentCount =
+        participants.filter(p => p.present).length;
+
     doc.setFontSize(20);
     doc.text("UGANDS Attendance Report", 20, 20);
+
+    doc.setFontSize(12);
+
+    doc.text(`Application: ${title}`, 20, 40);
+    doc.text(`Date: ${date}`, 20, 50);
+    doc.text(`Total: ${participants.length}`, 20, 60);
+    doc.text(`Present: ${presentCount}`, 20, 70);
 
     doc.save("attendance-report.pdf");
 
 });
-}
 
 loadApplication();
 
