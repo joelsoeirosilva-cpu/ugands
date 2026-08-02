@@ -342,7 +342,7 @@ const { data: result, error } = await db
       participants: participants
     }
   })
-  .eq("share_token", shareToken);
+  .eq("share_token", shareToken)
   .select();
 
 console.log("APP ID:", appId);
