@@ -162,7 +162,7 @@ Upload an Excel or CSV file and choose how you want to transform your data.
 <textarea
     id="participantsText"
     rows="6"
-    placeholder="Joel, Carlos, Américo, Pedro"
+    placeholder="example1, example2, example3, example4"
     style="
         width:100%;
         padding:12px;
@@ -379,6 +379,23 @@ output.innerHTML = html;
 document
 .getElementById("generateBtn")
 .addEventListener("click", async function(){
+
+const manualText =
+document.getElementById("participantsText")
+.value
+.trim();
+
+if(manualText){
+
+    participants = manualText
+        .split(/[\n,]+/)
+        .map(name => ({
+            name: name.trim(),
+            present: false
+        }))
+        .filter(p => p.name);
+
+}
 
 const appData = {
 
