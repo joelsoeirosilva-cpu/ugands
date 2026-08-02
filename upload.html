@@ -147,7 +147,11 @@ Upload an Excel or CSV file and choose how you want to transform your data.
 
 <h3>Select a file</h3>
 
-<input type="file" id="fileInput">
+<input
+    type="file"
+    id="fileInput"
+    accept=".csv,.xlsx,.xls"
+>
 
 <p id="selectedFile"></p>
 
@@ -257,7 +261,7 @@ Generate Application
 </div>
 
 </div>
-
+<script src.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.jsscript>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -295,13 +299,55 @@ fileInput.addEventListener("change", function(){
         "✅ Selected file: " + file.name;
 
     const reader = new FileReader();
+	
+	if(file.name.endsWith(".xlsx") ||
+   file.name.endsWith(".xls")){
 
-    reader.onload = function(e){
+    reader.readAsArrayBuffer(file);
+
+} else {
+
+    reader.readAsText(file);
+
+}
+
+reader.onload = function(e){
+
+    let rows = [];
+
+    if(
+        file.name.endsWith(".xlsx") ||
+        file.name.endsWith(".xls")
+    ){
+
+        const workbook =
+            XLSX.read(e.target.result, {
+                type: "array"
+            });
+
+        const sheet =
+            workbook.Sheets[
+                workbook.SheetNames[0]
+            ];
+
+        rows =
+            XLSX.utils.sheet_to_json(
+                sheet,
+                { header: 1 }
+            );
+
+    } else {
 
         const text = e.target.result;
 
-const rows = text.trim().split("\n");
-participants = [];
+        rows =
+            text.trim()
+                .split("\n")
+                .map(row => row.split(","));
+
+    }
+
+    participants = [];
 
 
 let html = `
@@ -314,10 +360,15 @@ margin:auto;
 
 for(let i = 1; i < rows.length; i++){
 
-    const cols = rows[i].split(",");
+    const cols = rows[i];
 
     const nome = cols[0];
-    const presente = cols[1]?.trim().toLowerCase() || "no";
+
+    const presente =
+        (cols[1] || "no")
+        .toString()
+        .trim()
+        .toLowerCase();
 	
 	participants.push({
     name: nome,
