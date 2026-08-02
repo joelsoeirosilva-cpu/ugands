@@ -330,11 +330,11 @@ window.toggleStatus = async function(button, index){
         button.classList.remove("yes");
         button.classList.add("no");
 		
-		participants[index].present = false;18
+		participants[index].present = false;
 
     }
 	
-	await db
+const { data: result, error } = await db
   .from("apps")
   .update({
     data: {
@@ -342,9 +342,14 @@ window.toggleStatus = async function(button, index){
       participants: participants
     }
   })
-  .eq("id", appId);
-	
-	updateStats();
+  .eq("id", appId)
+  .select();
+
+console.log("APP ID:", appId);
+console.log("UPDATE RESULT:", result);
+console.log("UPDATE ERROR:", error);
+
+updateStats();
 
 }
 document
