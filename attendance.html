@@ -428,6 +428,23 @@ document
     doc.text(`Present: ${presentCount}`, 20, 70);
 
     doc.save("attendance-report.pdf");
+	let y = 90;
+
+doc.text("Participants", 20, y);
+
+y += 10;
+
+participants.forEach(person => {
+
+    doc.text(
+        `${person.name} - ${person.present ? "YES" : "NO"}`,
+        20,
+        y
+    );
+
+    y += 10;
+
+});
 
 });
 }
