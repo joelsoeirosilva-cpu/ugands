@@ -427,9 +427,14 @@ document
     doc.text(`Total: ${participants.length}`, 20, 60);
     doc.text(`Present: ${presentCount}`, 20, 70);
 
-	let y = 90;
+let y = 90;
 
-doc.text("Participants", 20, y);
+doc.text("Participant", 20, y);
+doc.text("Status", 150, y);
+
+y += 10;
+
+doc.line(20, y, 190, y);
 
 y += 10;
 
@@ -442,11 +447,13 @@ participants.forEach(person => {
 
     }
 
-    doc.text(
-        `${person.name} - ${person.present ? "YES" : "NO"}`,
-        20,
-        y
-    );
+doc.text(person.name, 20, y);
+
+doc.text(
+    person.present ? "YES" : "NO",
+    150,
+    y
+);
 
     y += 10;
 
