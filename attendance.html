@@ -525,28 +525,7 @@ doc.setTextColor(0, 0, 0);
 
     y += 10;
 
-y += 15;
-
-doc.setFont(undefined, "bold");
-
-doc.text(
-    `Total Participants: ${participants.length}`,
-    20,
-    y
-);
-
-y += 10;
-
-doc.text(
-    `Present: ${presentCount}`,
-    20,
-    y
-);
-
-doc.setFont(undefined, "normal");
-
 });
-
 const fileName =
     title.replaceAll(" ", "-");
 
