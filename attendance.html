@@ -427,7 +427,7 @@ document
     doc.text(`Total: ${participants.length}`, 20, 60);
     doc.text(`Present: ${presentCount}`, 20, 70);
 
-let y = 90;
+let y = 75;
 
 doc.setFillColor(240, 240, 240);
 
@@ -476,8 +476,8 @@ y += 8;
 
 }
 
-doc.rect(20, y - 8, 120, 12);
-doc.rect(140, y - 8, 40, 12);
+doc.rect(20, y - 6, 120, 10);
+doc.rect(140, y - 6, 40, 10);
 doc.text(person.name, 25, y);
 
 
@@ -497,7 +497,7 @@ if(person.present){
 
 doc.setTextColor(0, 0, 0);
 
-    y += 12;
+    y += 10;
 
 });
 const fileName =
