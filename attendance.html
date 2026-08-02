@@ -429,14 +429,22 @@ document
 
 let y = 90;
 
-doc.text("Participant", 20, y);
+doc.setFillColor(240, 240, 240);
+
+doc.rect(20, y - 8, 160, 12, "F");
+
+doc.setFont(undefined, "bold");
+
+doc.text("Participant", 25, y);
 doc.text("Status", 150, y);
 
-y += 10;
+doc.setFont(undefined, "normal");
 
-doc.line(20, y, 190, y);
+y += 12;
 
-y += 10;
+doc.line(20, y, 180, y);
+
+y += 8;
 
 participants.forEach(person => {
 
@@ -446,16 +454,14 @@ if (y > 270) {
     y = 20;
 
 doc.setDrawColor(200, 200, 200);
-doc.rect(20, y - 8, 120, 10);
-doc.rect(140, y - 8, 40, 10);
+
 doc.text("Participant", 25, y);
 doc.text("Status", 150, y);
 
     y += 12;
 }
 
-doc.rect(20, y - 8, 120, 10);
-doc.rect(140, y - 8, 40, 10);
+
 doc.text(person.name, 20, y);
 
 
