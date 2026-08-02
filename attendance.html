@@ -477,13 +477,21 @@ if(person.present){
 
     doc.setTextColor(22, 163, 74);
 
-doc.text("✔", 160, y);
+doc.setDrawColor(22, 163, 74);
+doc.setLineWidth(1);
+
+doc.line(156, y - 1, 159, y + 2);
+doc.line(159, y + 2, 164, y - 4);
 
 } else {
 
     doc.setTextColor(220, 38, 38);
 
-doc.text("✖", 160, y);
+doc.setDrawColor(220, 38, 38);
+doc.setLineWidth(1);
+
+doc.line(157, y - 4, 163, y + 2);
+doc.line(163, y - 4, 157, y + 2);
 }
 
 doc.setTextColor(0, 0, 0);
