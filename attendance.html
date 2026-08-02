@@ -449,11 +449,21 @@ participants.forEach(person => {
 
 doc.text(person.name, 20, y);
 
-doc.text(
-    person.present ? "YES" : "NO",
-    150,
-    y
-);
+if(person.present){
+
+    doc.setTextColor(22, 163, 74);
+
+    doc.text("YES", 150, y);
+
+} else {
+
+    doc.setTextColor(220, 38, 38);
+
+    doc.text("NO", 150, y);
+
+}
+
+doc.setTextColor(0, 0, 0);
 
     y += 10;
 
