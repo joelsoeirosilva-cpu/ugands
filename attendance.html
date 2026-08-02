@@ -445,6 +445,12 @@ y += 12;
 
 participants.forEach(person => {
 
+const checkImg = new Image();
+checkImg.src = "check.png";
+
+const crossImg = new Image();
+crossImg.src = "cross.png";
+
 if (y > 270) {
 
     doc.addPage();
@@ -476,24 +482,31 @@ doc.text(person.name, 25, y);
 
 if(person.present){
 
-    doc.setTextColor(22, 163, 74);
+doc.addImage(
+    checkImg,
+    "PNG",
+    153,
+    y - 5,
+    8,
+    8
+);
 
-doc.setDrawColor(22, 163, 74);
-doc.setLineWidth(1.5);
 
-doc.line(156, y - 1, 159, y + 2);
-doc.line(159, y + 2, 164, y - 4);
 doc.setDrawColor(0, 0, 0);
 
 } else {
 
-    doc.setTextColor(220, 38, 38);
+doc.addImage(
+    crossImg,
+    "PNG",
+    153,
+    y - 5,
+    8,
+    8
+);
+``
 
-doc.setDrawColor(220, 38, 38);
-doc.setLineWidth(1.5);
 
-doc.line(155, y - 4, 165, y + 4);
-doc.line(165, y - 4, 155, y + 4);
 doc.setDrawColor(0, 0, 0);
 }
 
