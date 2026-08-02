@@ -467,9 +467,10 @@ doc.setFont(undefined, "normal");
 y += 12;
 
 }
-
+doc.setDrawColor(0, 0, 0);
 doc.rect(20, y - 6, 120, 10);
 doc.rect(140, y - 6, 40, 10);
+
 doc.text(person.name, 25, y);
 
 
@@ -478,20 +479,22 @@ if(person.present){
     doc.setTextColor(22, 163, 74);
 
 doc.setDrawColor(22, 163, 74);
-doc.setLineWidth(1);
+doc.setLineWidth(1.5);
 
 doc.line(156, y - 1, 159, y + 2);
 doc.line(159, y + 2, 164, y - 4);
+doc.setDrawColor(0, 0, 0);
 
 } else {
 
     doc.setTextColor(220, 38, 38);
 
 doc.setDrawColor(220, 38, 38);
-doc.setLineWidth(1);
+doc.setLineWidth(1.5);
 
-doc.line(157, y - 4, 163, y + 2);
-doc.line(163, y - 4, 157, y + 2);
+doc.line(155, y - 4, 165, y + 4);
+doc.line(165, y - 4, 155, y + 4);
+doc.setDrawColor(0, 0, 0);
 }
 
 doc.setTextColor(0, 0, 0);
