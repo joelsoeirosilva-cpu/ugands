@@ -211,7 +211,8 @@ if (error) {
     alert("Application not found");
     return;
 }
-
+const logoImg = new Image();
+logoImg.src = "logo.PNG";
 window.participants = data.data.participants || [];
 const participants = window.participants;
 
@@ -417,17 +418,23 @@ document
     const presentCount =
         participants.filter(p => p.present).length;
 
-    doc.setFontSize(20);
-    doc.text("UGANDS Attendance Report", 20, 20);
+doc.addImage(
+    logoImg,
+    "PNG",
+    75,
+    10,
+    60,
+    60
+);
 
     doc.setFontSize(12);
 
-    doc.text(`Application: ${title}`, 20, 40);
-    doc.text(`Date: ${date}`, 20, 50);
-    doc.text(`Total: ${participants.length}`, 20, 60);
-    doc.text(`Present: ${presentCount}`, 20, 70);
+doc.text(`Application: ${title}`, 20, 85);
+doc.text(`Date: ${date}`, 20, 95);
+doc.text(`Total: ${participants.length}`, 20, 105);
+doc.text(`Present: ${presentCount}`, 20, 115);
 
-let y = 90;
+let y = 135;
 
 doc.setFillColor(240, 240, 240);
 
