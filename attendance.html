@@ -431,14 +431,25 @@ doc.addImage(
 
 doc.setFont(undefined, "bold");
 doc.setFontSize(18);
+doc.setTextColor(37, 99, 235);
 
-doc.text(title, 20, 80);
+doc.text(title, 20, 70);
+
+doc.setTextColor(0, 0, 0);
 
 doc.setFont(undefined, "normal");
 doc.setFontSize(12);
-doc.text(`Date: ${date}`, 150, 80);
+doc.setFont(undefined, "bold");
+doc.text("Date:", 145, 70);
 
-let y = 105;
+doc.setFont(undefined, "normal");
+doc.setTextColor(37, 99, 235);
+
+doc.text(date, 160, 70);
+
+doc.setTextColor(0, 0, 0);
+
+let y = 90;
 
 doc.setFillColor(240, 240, 240);
 
@@ -531,19 +542,27 @@ y += 15;
 
 doc.setFont(undefined, "bold");
 
-doc.text(
-    `Total Participants: ${participants.length}`,
-    20,
-    y
-);
+doc.setFont(undefined, "bold");
+doc.text("Total:", 20, y);
+
+doc.setFont(undefined, "normal");
+doc.setTextColor(37, 99, 235);
+
+doc.text(`${participants.length}`, 40, y);
+
+doc.setTextColor(0, 0, 0);
 
 y += 10;
 
-doc.text(
-    `Present: ${presentCount}`,
-    20,
-    y
-);
+doc.setFont(undefined, "bold");
+doc.text("Check:", 20, y);
+
+doc.setFont(undefined, "normal");
+doc.setTextColor(37, 99, 235);
+
+doc.text(`${presentCount}`, 43, y);
+
+doc.setTextColor(0, 0, 0);
 
 doc.setFont(undefined, "normal");
 
