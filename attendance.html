@@ -435,6 +435,13 @@ y += 10;
 
 participants.forEach(person => {
 
+    if (y > 270) {
+
+        doc.addPage();
+        y = 20;
+
+    }
+
     doc.text(
         `${person.name} - ${person.present ? "YES" : "NO"}`,
         20,
@@ -444,7 +451,10 @@ participants.forEach(person => {
     y += 10;
 
 });
-    doc.save("attendance-report.pdf");
+const fileName =
+    title.replaceAll(" ", "-");
+
+doc.save(`${fileName}.pdf`);
 
 });
 }
