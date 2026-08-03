@@ -354,6 +354,13 @@ const db = createClient(
     supabaseKey
 );
 
+db.auth.onAuthStateChange((event, session) => {
+
+    console.log("AUTH EVENT:", event);
+    console.log("AUTH SESSION:", session);
+
+});
+
 let currentUser = null;
 let currentProfile = null;
 
@@ -635,10 +642,12 @@ continueFreeBtn.addEventListener("click", () => {
 
 loginBtn.addEventListener("click", async () => {
 
+    const currentUrl = window.location.href;
+
     await db.auth.signInWithOAuth({
         provider: "google",
         options: {
-            redirectTo: "https://www.ugands.com/upload.html"
+            redirectTo: currentUrl
         }
     });
 
