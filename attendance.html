@@ -155,17 +155,6 @@ text-align:right;
     >
         Export PDF
     </button>
-	<span
-    id="pdfStatus"
-    style="
-        display:none;
-        margin-left:10px;
-        color:#2563eb;
-        font-weight:bold;
-    "
->
-    Generating PDF...
-</span>
 
 </div>
 
@@ -418,7 +407,7 @@ document
 
 document.getElementById(
     "pdfStatus"
-).style.display = "inline";
+).style.display = "flex";
 
 setTimeout(() => {
 
@@ -635,6 +624,25 @@ document
     });
 
 </script>
-
+<div
+    id="pdfStatus"
+    style="
+        display:none;
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(255,255,255,0.85);
+        z-index:9999;
+        justify-content:center;
+        align-items:center;
+        font-size:28px;
+        font-weight:bold;
+        color:#2563eb;
+    "
+>
+    Generating PDF...
+</div>
 </body>
 </html>
