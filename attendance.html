@@ -420,6 +420,8 @@ document.getElementById(
     "pdfStatus"
 ).style.display = "inline";
 
+setTimeout(() => {
+
     const { jsPDF } = window.jspdf;
 	
 	function drawTableHeader(y) {
@@ -606,15 +608,14 @@ doc.text(
 doc.setTextColor(0,0,0);
 doc.setFontSize(12);
 
-setTimeout(() => {
+doc.save(`${fileName}.pdf`);
 
-    doc.save(`${fileName}.pdf`);
-
-    document.getElementById(
-        "pdfStatus"
-    ).style.display = "none";
+document.getElementById(
+    "pdfStatus"
+).style.display = "none";
 
 }, 100);
+
 
 });
 }
