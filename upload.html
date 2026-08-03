@@ -457,6 +457,19 @@ if(manualText){
 
 }
 
+if (participants.length > 10) {
+
+    const continueFree = confirm(
+        "The free plan supports only 10 participants.\n\nContinue with the first 10 participants?"
+    );
+
+    if (!continueFree) {
+        return;
+    }
+
+    participants = participants.slice(0, 10);
+}
+
 console.log("PARTICIPANTS:", participants);
 
 const appData = {
