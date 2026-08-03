@@ -639,6 +639,10 @@ loginBtn.addEventListener("click", async () => {
 
 });
 
+db.auth.getUser().then(({ data }) => {
+    console.log("USER:", data.user);
+});
+
 </script>
 
 </body>
