@@ -98,6 +98,23 @@ const db = createClient(
     supabaseKey
 );
 
+async function checkSession() {
+
+    const {
+        data: { session }
+    } = await db.auth.getSession();
+
+    if (session) {
+
+        window.location.href =
+            "upload.html";
+
+    }
+
+}
+
+checkSession();
+
 document
 .getElementById("googleBtn")
 .addEventListener("click", async () => {
