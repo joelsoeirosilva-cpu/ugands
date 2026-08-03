@@ -533,7 +533,7 @@ document.getElementById("participantsText")
 .value
 .trim();
 
-if(manualText){
+if(manualText && !continueGeneration){
 
     participants = manualText
         .split(/[\n,]+/)
@@ -595,6 +595,7 @@ if(error){
 
     return;
 }
+continueGeneration = false;
 window.location.href =
     `attendance.html?share=${data[0].share_token}`;
 
