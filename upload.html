@@ -631,6 +631,14 @@ continueFreeBtn.addEventListener("click", () => {
 
 });
 
+loginBtn.addEventListener("click", async () => {
+
+    await db.auth.signInWithOAuth({
+        provider: "google"
+    });
+
+});
+
 </script>
 
 </body>
