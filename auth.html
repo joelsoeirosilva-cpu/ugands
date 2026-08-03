@@ -98,11 +98,17 @@ const db = createClient(
     supabaseKey
 );
 
+db.auth.getSession().then(({ data }) => {
+    console.log("SESSION:", data.session);
+});
+
 async function checkSession() {
 
     const {
         data: { session }
     } = await db.auth.getSession();
+
+    console.log("AUTH SESSION:", session);
 
     if (session) {
 
