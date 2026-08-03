@@ -363,17 +363,26 @@ let currentProfile = null;
 
 async function loadUser() {
 
-    const { data, error } =
+    const { data } =
         await db.auth.getSession();
 
     if (!data.session) {
-        
         return;
     }
 
     currentUser = data.session.user;
-	console.log("PLAN:", currentProfile?.plan);
-	console.log("ACCOUNT:", currentProfile?.account_type);
+
+    const { data: profile, error } = await db
+        .from("profiles")
+        .select("*")
+        .eq("id", currentUser.id)
+        .single();
+
+    currentProfile = profile;
+
+    console.log("USER:", currentUser);
+    console.log("PROFILE:", currentProfile);
+    console.log("PROFILE ERROR:", error);
 
 }
 
