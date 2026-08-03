@@ -155,6 +155,15 @@ body{
         </p>
 
     </div>
+	
+	<div
+    id="userPlan"
+    style="
+    margin-top:20px;
+    font-weight:600;
+    color:#2563eb;
+    ">
+</div>
 
     <div class="pricing">
 
@@ -250,7 +259,43 @@ body{
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+
+const supabaseUrl =
+"https://jrowpoyottntwmpvqaks.supabase.co";
+
+const supabaseKey =
+"sb_publishable_nltzzKx3WVg9i7H90E5duA_sWxne9qN";
+
+const { createClient } = window.supabase;
+
+const db = createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+async function loadProfile() {
+
+    const {
+        data: { user }
+    } = await db.auth.getUser();
+
+    if (!user) return;
+
+    const { data: profile } = await db
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+    document.getElementById("userPlan").innerText =
+        `Logged in as ${profile.full_name} • Plan: ${profile.plan.toUpperCase()}`;
+
+}
+
+loadProfile();
 
 document
 .getElementById("upgradeProBtn")
