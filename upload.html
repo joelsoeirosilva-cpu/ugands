@@ -142,6 +142,16 @@ input[type=file]{
 
 </div>
 
+<div
+    id="userInfo"
+    style="
+    text-align:center;
+    margin-bottom:20px;
+    font-weight:600;
+    color:#2563eb;
+    ">
+</div>
+
 <div class="card">
 
 <h1>Upload Your File</h1>
@@ -383,6 +393,9 @@ async function loadUser() {
     console.log("USER:", currentUser);
     console.log("PROFILE:", currentProfile);
     console.log("PROFILE ERROR:", error);
+	
+	document.getElementById("userInfo").innerText =
+    `${currentProfile.full_name} • ${currentProfile.plan.toUpperCase()}`;
 
 }
 
