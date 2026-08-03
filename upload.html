@@ -281,6 +281,7 @@ const output = document.getElementById("output");
 
 let participants = [];
 let selectedTemplate = "attendance";
+let continueGeneration = false;
 
 const supabaseUrl =
 "https://jrowpoyottntwmpvqaks.supabase.co";
@@ -469,7 +470,7 @@ if(manualText){
 
 }
 	console.log("TOTAL PARTICIPANTS:", participants.length);
-if (participants.length > 10) {
+if (participants.length > 10 && !continueGeneration) {
 
     paywallModal.style.display = "flex";
 
@@ -571,12 +572,14 @@ testInsert();
 continueFreeBtn.addEventListener("click", () => {
 
     participants = participants.slice(0, 10);
+	
+	continueGeneration = true;
 
     paywallModal.style.display = "none";
 
-    alert(
-        "Free mode selected.\nOnly the first 10 participants will be used."
-    );
+	document
+	.getElementById("generateBtn")
+	.click();
 
 });
 
