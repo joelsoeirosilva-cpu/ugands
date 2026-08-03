@@ -189,9 +189,11 @@ body{
                 <li>✅ Share links available for 1 day</li>
             </ul>
 
-            <button class="btn btn-free">
-                Current Plan
-            </button>
+<button
+    id="freePlanBtn"
+    class="btn btn-free">
+    Current Plan
+</button>
 
         </div>
 
@@ -292,6 +294,8 @@ async function loadProfile() {
 
     document.getElementById("userPlan").innerText =
         `Logged in as ${profile.full_name} • Plan: ${profile.plan.toUpperCase()}`;
+
+    console.log("PROFILE:", profile);
 
 }
 
