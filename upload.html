@@ -617,15 +617,17 @@ testInsert();
 
 continueFreeBtn.addEventListener("click", () => {
 
+    console.log("CONTINUE FREE CLICKED");
+
     participants = participants.slice(0, 10);
-	
-	continueGeneration = true;
+
+    continueGeneration = true;
 
     paywallModal.style.display = "none";
 
-	document
-	.getElementById("generateBtn")
-	.click();
+    document
+        .getElementById("generateBtn")
+        .click();
 
 });
 
