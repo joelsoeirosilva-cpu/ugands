@@ -140,11 +140,8 @@ document
 .addEventListener("click", async () => {
 
     await db.auth.signInWithOAuth({
-        provider: "azure",
-        options: {
-            redirectTo:
-                "https://www.ugands.com/upload.html"
-        }
+        provider: "azure"
+
     });
 
 });
