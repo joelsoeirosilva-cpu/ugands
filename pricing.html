@@ -294,6 +294,16 @@ async function loadProfile() {
 
     document.getElementById("userPlan").innerText =
         `Logged in as ${profile.full_name} • Plan: ${profile.plan.toUpperCase()}`;
+		
+	if (profile.plan === "pro") {
+
+    document.getElementById("upgradeProBtn")
+        .innerText = "Current Plan";
+
+    document.getElementById("upgradeProBtn")
+        .disabled = true;
+
+}
 
     console.log("PROFILE:", profile);
 
