@@ -456,7 +456,7 @@ if(manualText){
         .filter(p => p.name);
 
 }
-
+	console.log("TOTAL PARTICIPANTS:", participants.length);
 if (participants.length > 10) {
 
     const continueFree = confirm(
@@ -467,7 +467,8 @@ if (participants.length > 10) {
         return;
     }
 
-    participants = participants.slice(0, 10);
+    participants = participants.slice(0, 10);	
+
 }
 
 console.log("PARTICIPANTS:", participants);
