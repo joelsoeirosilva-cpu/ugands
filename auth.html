@@ -98,7 +98,19 @@ const db = createClient(
     supabaseKey
 );
 
+db.auth.onAuthStateChange((event, session) => {
+
+    console.log("EVENT:", event);
+    console.log("SESSION:", session);
+
+    if (session) {
+        window.location.href = "upload.html";
+    }
+
+});
+
 db.auth.getSession().then(({ data }) => {
+
     console.log("SESSION:", data.session);
 });
 
@@ -119,7 +131,9 @@ async function checkSession() {
 
 }
 
-checkSession();
+setTimeout(() => {
+    checkSession();
+}, 2000);
 
 document
 .getElementById("googleBtn")
