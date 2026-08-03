@@ -642,7 +642,10 @@ continueFreeBtn.addEventListener("click", () => {
 loginBtn.addEventListener("click", async () => {
 
     await db.auth.signInWithOAuth({
-        provider: "google"
+        provider: "google",
+        options: {
+            redirectTo: "https://www.ugands.com/upload.html"
+        }
     });
 
 });
