@@ -394,6 +394,10 @@ async function loadUser() {
     console.log("PROFILE:", currentProfile);
     console.log("PROFILE ERROR:", error);
 	
+	console.log(
+    document.getElementById("userInfo")
+);
+	
 	document.getElementById("userInfo").innerText =
     `${currentProfile.full_name} • ${currentProfile.plan.toUpperCase()}`;
 
