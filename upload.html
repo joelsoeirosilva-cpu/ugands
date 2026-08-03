@@ -359,26 +359,20 @@ let currentProfile = null;
 
 async function loadUser() {
 
-    const {
-        data: { user }
-    } = await db.auth.getUser();
+    const { data, error } =
+        await db.auth.getSession();
 
-    currentUser = user;
+    console.log("SESSION DATA:", data);
+    console.log("SESSION ERROR:", error);
+
+    if (!data.session) {
+        console.log("NO SESSION");
+        return;
+    }
+
+    currentUser = data.session.user;
 
     console.log("USER:", currentUser);
-
-    if (!currentUser) return;
-
-    const { data: profile, error } = await db
-        .from("profiles")
-        .select("*")
-        .eq("id", currentUser.id)
-        .single();
-
-    currentProfile = profile;
-
-    console.log("PROFILE:", currentProfile);
-    console.log("PROFILE ERROR:", error);
 }
 
 loadUser();
