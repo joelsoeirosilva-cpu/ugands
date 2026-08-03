@@ -372,13 +372,13 @@ async function loadUser() {
     const { data: profile, error } = await db
         .from("profiles")
         .select("*")
-        .eq("id", currentUser.i*)
+        .eq("id", currentUser.id)
         .single();
 
     currentProfile = profile;
 
     console.log("PROFILE:", currentProfile);
-    console.log("PROFILE ERROR:", error);*
+    console.log("PROFILE ERROR:", error);
 }
 
 loadUser();
