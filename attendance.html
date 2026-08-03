@@ -540,15 +540,13 @@ doc.setTextColor(0, 0, 0);
 
 y += 10;
 
-doc.setFont(undefined, "bold");
 
 doc.setFont(undefined, "bold");
 doc.text("Total:", 20, y);
 
 doc.setFont(undefined, "normal");
 doc.setTextColor(37, 99, 235);
-
-doc.text(`${participants.length}`, 40, y);
+doc.text(`${participants.length}`, 50, y);
 
 doc.setTextColor(0, 0, 0);
 
@@ -560,7 +558,7 @@ doc.text("Check:", 20, y);
 doc.setFont(undefined, "normal");
 doc.setTextColor(37, 99, 235);
 
-doc.text(`${presentCount}`, 43, y);
+doc.text(`${presentCount}`, 50, y);
 
 doc.setTextColor(0, 0, 0);
 
@@ -569,6 +567,28 @@ doc.setFont(undefined, "normal");
 doc.setFont(undefined, "normal");
 const fileName =
     title.replaceAll(" ", "-");
+	
+doc.setDrawColor(220,220,220);
+
+doc.line(
+    20,
+    284,
+    190,
+    284
+);
+
+doc.setFontSize(9);
+doc.setTextColor(150,150,150);
+
+doc.text(
+    "Generated with UGANDS.com",
+    105,
+    290,
+    { align: "center" }
+);
+
+doc.setTextColor(0,0,0);
+doc.setFontSize(12);
 
 doc.save(`${fileName}.pdf`);
 
