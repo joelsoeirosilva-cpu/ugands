@@ -278,6 +278,17 @@ Generate Application
 const fileInput = document.getElementById("fileInput");
 const selectedFile = document.getElementById("selectedFile");
 const output = document.getElementById("output");
+const paywallModal =
+document.getElementById("paywallModal");
+
+const continueFreeBtn =
+document.getElementById("continueFreeBtn");
+
+const loginBtn =
+document.getElementById("loginBtn");
+
+const upgradeBtn =
+document.getElementById("upgradeBtn");
 
 let participants = [];
 let selectedTemplate = "attendance";
@@ -445,18 +456,6 @@ document.getElementById("participantsText")
 .trim();
 
 console.log("MANUAL TEXT:", manualText);
-
-const paywallModal =
-document.getElementById("paywallModal");
-
-const continueFreeBtn =
-document.getElementById("continueFreeBtn");
-
-const loginBtn =
-document.getElementById("loginBtn");
-
-const upgradeBtn =
-document.getElementById("upgradeBtn");
 
 if(manualText){
 
