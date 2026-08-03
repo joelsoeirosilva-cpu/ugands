@@ -428,7 +428,9 @@ document
     const doc = new jsPDF();
 
     const participants = window.participants || [];
-    const title = window.appTitle || "Attendance Tracker";
+    const title = window.appTitle || "List Tracker";
+	const showTotal = window.appData.showTotal;
+	const showPresent = window.appData.showPresent;
 
     const date =
         document.getElementById("attendanceDate").value;
@@ -538,6 +540,8 @@ if (y > 245) {
     doc.addPage();
 }
 
+if(showTotal){
+
 doc.setFont(undefined, "bold");
 doc.text("Total:", 130, 265);
 
@@ -546,6 +550,9 @@ doc.setTextColor(37, 99, 235);
 doc.text(`${participants.length}`, 160, 265);
 
 doc.setTextColor(0, 0, 0);
+}
+
+if(showPresent) {
 
 doc.setFont(undefined, "bold");
 doc.text("Check:", 130, 273);
@@ -555,7 +562,7 @@ doc.setTextColor(37, 99, 235);
 doc.text(`${presentCount}`, 160, 273);
 
 doc.setTextColor(0, 0, 0);
-
+}
 doc.setFont(undefined, "normal");
 
 doc.setFont(undefined, "normal");
