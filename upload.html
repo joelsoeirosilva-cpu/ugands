@@ -445,6 +445,18 @@ document.getElementById("participantsText")
 
 console.log("MANUAL TEXT:", manualText);
 
+const paywallModal =
+document.getElementById("paywallModal");
+
+const continueFreeBtn =
+document.getElementById("continueFreeBtn");
+
+const loginBtn =
+document.getElementById("loginBtn");
+
+const upgradeBtn =
+document.getElementById("upgradeBtn");
+
 if(manualText){
 
     participants = manualText
@@ -459,16 +471,9 @@ if(manualText){
 	console.log("TOTAL PARTICIPANTS:", participants.length);
 if (participants.length > 10) {
 
-    const continueFree = confirm(
-        "The free plan supports only 10 participants.\n\nContinue with the first 10 participants?"
-    );
+    paywallModal.style.display = "flex";
 
-    if (!continueFree) {
-        return;
-    }
-
-    participants = participants.slice(0, 10);	
-
+    return;
 }
 
 console.log("PARTICIPANTS:", participants);
@@ -562,6 +567,18 @@ async function testInsert(){
 }
 
 testInsert();
+
+continueFreeBtn.addEventListener("click", () => {
+
+    participants = participants.slice(0, 10);
+
+    paywallModal.style.display = "none";
+
+    alert(
+        "Free mode selected.\nOnly the first 10 participants will be used."
+    );
+
+});
 
 </script>
 <div id="paywallModal" style="
