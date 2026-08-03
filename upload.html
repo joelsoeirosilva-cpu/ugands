@@ -354,6 +354,35 @@ const db = createClient(
     supabaseKey
 );
 
+let currentUser = null;
+let currentProfile = null;
+
+async function loadUser() {
+
+    const {
+        data: { user }
+    } = await db.auth.getUser();
+
+    currentUser = user;
+
+    console.log("USER:", currentUser);
+
+    if (!currentUser) return;
+
+    const { data: profile, error } = await db
+        .from("profiles")
+        .select("*")
+        .eq("id", currentUser.i*)
+        .single();
+
+    currentProfile = profile;
+
+    console.log("PROFILE:", currentProfile);
+    console.log("PROFILE ERROR:", error);*
+}
+
+loadUser();
+
 console.log(db);
 console.log(typeof db.from);
 
@@ -594,27 +623,6 @@ templates.forEach(template => {
 
 templates[0].classList.add("selected");
 
-async function testInsert(){
-
-    const { data, error } = await db
-        .from("apps")
-        .insert([
-            {
-                template: "attendance",
-                data: {
-                    title: "Teste UGANDS"
-                }
-            }
-        ])
-        .select();
-
-    console.log("DATA:", data);
-    console.log("ERROR:", error);
-
-}
-
-testInsert();
-
 continueFreeBtn.addEventListener("click", () => {
 
     console.log("CONTINUE FREE CLICKED");
@@ -639,17 +647,6 @@ loginBtn.addEventListener("click", async () => {
 
 });
 
-setTimeout(async () => {
-
-    const {
-        data: { user },
-        error
-    } = await db.auth.getUser();
-
-    console.log("USER:", user);
-    console.log("ERROR:", error);
-
-}, 1000);
 
 </script>
 
