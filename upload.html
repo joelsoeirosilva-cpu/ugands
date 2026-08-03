@@ -639,9 +639,17 @@ loginBtn.addEventListener("click", async () => {
 
 });
 
-db.auth.getUser().then(({ data }) => {
-    console.log("USER:", data.user);
-});
+setTimeout(async () => {
+
+    const {
+        data: { user },
+        error
+    } = await db.auth.getUser();
+
+    console.log("USER:", user);
+    console.log("ERROR:", error);
+
+}, 1000);
 
 </script>
 
