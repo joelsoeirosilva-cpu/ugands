@@ -406,6 +406,24 @@ document
 .addEventListener("click", function(){
 
     const { jsPDF } = window.jspdf;
+	
+	function drawTableHeader(y) {
+
+    doc.setDrawColor(200, 200, 200);
+
+    doc.setFillColor(240, 240, 240);
+
+    doc.rect(20, y - 8, 120, 14, "FD");
+    doc.rect(140, y - 8, 40, 14, "FD");
+
+    doc.setFont(undefined, "bold");
+
+    doc.text("Participant", 25, y);
+    doc.text("Status", 150, y);
+
+    doc.setFont(undefined, "normal");
+
+}
 
     const doc = new jsPDF();
 
@@ -451,17 +469,7 @@ doc.setTextColor(0, 0, 0);
 
 let y = 90;
 
-doc.setFillColor(240, 240, 240);
-
-doc.rect(20, y - 8, 120, 14, "FD");
-doc.rect(140, y - 8, 40, 14, "FD");
-
-doc.setFont(undefined, "bold");
-
-doc.text("List", 25, y);
-doc.text("Status", 150, y);
-
-doc.setFont(undefined, "normal");
+drawTableHeader(y);
 
 y += 12;
 
@@ -477,22 +485,8 @@ if (y > 270) {
 
     doc.addPage();
     y = 20;
-
-doc.setDrawColor(200, 200, 200);
-
-doc.setFillColor(240, 240, 240);
-
-doc.rect(20, y - 8, 120, 14, "FD");
-doc.rect(140, y - 8, 40, 14, "FD");
-
-doc.setFont(undefined, "bold");
-
-doc.text("Participant", 25, y);
-doc.text("Status", 150, y);
-
-doc.setFont(undefined, "normal");
-
-y += 12;
+	drawTableHeader(y);
+	y +=12;
 
 }
 doc.setDrawColor(0, 0, 0);
