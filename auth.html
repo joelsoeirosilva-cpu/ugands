@@ -129,6 +129,20 @@ document
 
 });
 
+document
+.getElementById("microsoftBtn")
+.addEventListener("click", async () => {
+
+    await db.auth.signInWithOAuth({
+        provider: "azure",
+        options: {
+            redirectTo:
+                "https://www.ugands.com/upload.html"
+        }
+    });
+
+});
+
 </script>
 
 </body>
