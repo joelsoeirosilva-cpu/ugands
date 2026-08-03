@@ -378,6 +378,7 @@ async function loadUser() {
         await db.auth.getSession();
 
     if (!data.session) {
+	window.location.href = "auth.html";
         return;
     }
 
