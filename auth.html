@@ -81,6 +81,39 @@ button{
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const supabaseUrl =
+"https://jrwopoyottntwmpvqaks.supabase.co";
+
+const supabaseKey =
+"sb_publishable_nltzzKx3WVg9i7H90E5duA_sWxne9qN";
+
+const { createClient } = window.supabase;
+
+const db = createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+document
+.getElementById("googleBtn")
+.addEventListener("click", async () => {
+
+    await db.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+            redirectTo:
+                "https://www.ugands.com/upload.html"
+        }
+    });
+
+});
+
+</script>
+
 </body>
 
 </html>
