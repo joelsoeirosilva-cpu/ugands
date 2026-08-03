@@ -356,9 +356,6 @@ const db = createClient(
 
 db.auth.onAuthStateChange((event, session) => {
 
-    console.log("AUTH EVENT:", event);
-    console.log("AUTH SESSION:", session);
-
 });
 
 let currentUser = null;
@@ -369,23 +366,18 @@ async function loadUser() {
     const { data, error } =
         await db.auth.getSession();
 
-    console.log("SESSION DATA:", data);
-    console.log("SESSION ERROR:", error);
-
     if (!data.session) {
-        console.log("NO SESSION");
+        
         return;
     }
 
     currentUser = data.session.user;
+	console.log("PLAN:", currentProfile?.plan);
+	console.log("ACCOUNT:", currentProfile?.account_type);
 
-    console.log("USER:", currentUser);
 }
 
 loadUser();
-
-console.log(db);
-console.log(typeof db.from);
 
 fileInput.addEventListener("change", function(){
 
@@ -532,8 +524,6 @@ document.getElementById("participantsText")
 .value
 .trim();
 
-console.log("MANUAL TEXT:", manualText);
-
 if(manualText){
 
     participants = manualText
@@ -545,15 +535,20 @@ if(manualText){
         .filter(p => p.name);
 
 }
-	console.log("TOTAL PARTICIPANTS:", participants.length);
-if (participants.length > 10 && !continueGeneration) {
+
+if (
+    participants.length > 10 &&
+    !continueGeneration &&
+    (
+        !currentProfile ||
+        currentProfile.plan !== "pro"
+    )
+) {
 
     paywallModal.style.display = "flex";
 
     return;
 }
-
-console.log("PARTICIPANTS:", participants);
 
 const appData = {
 
