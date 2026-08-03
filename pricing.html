@@ -4,11 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>UGANDS | Upload File</title>
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossoriginht@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>UGANDS | Pricing</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -20,13 +19,13 @@ body{
     color:#111827;
     background:#ffffff;
     background-image:
-    linear-gradient(#edf2f7 1px, transparent 1px),
-    linear-gradient(90deg,#edf2f7 1px, transparent 1px);
+        linear-gradient(#edf2f7 1px, transparent 1px),
+        linear-gradient(90deg,#edf2f7 1px, transparent 1px);
     background-size:50px 50px;
 }
 
 .container{
-    max-width:900px;
+    max-width:1300px;
     margin:auto;
     padding:25px 20px;
 }
@@ -37,94 +36,99 @@ body{
     margin-bottom:20px;
 }
 
+.hero{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.hero h1{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#64748b;
+    font-size:18px;
+}
+
+.pricing{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
 .card{
     background:#f3f4f6;
     border:1px solid #e5e7eb;
-    border-radius:20px;
+    border-radius:24px;
     padding:40px;
     box-shadow:0 10px 30px rgba(0,0,0,.05);
 }
 
-h1{
+.card.pro{
+    border:2px solid #2563eb;
+}
+
+.plan{
+    color:#2563eb;
+    font-size:14px;
+    font-weight:700;
     margin-bottom:15px;
 }
 
-p{
-    color:#64748b;
+.price{
+    font-size:48px;
+    font-weight:800;
+}
+
+.period{
+    margin-top:5px;
     margin-bottom:30px;
+    color:#64748b;
 }
 
-.upload-box{
-    border:2px dashed #cbd5e1;
-    border-radius:16px;
-    padding:50px;
-    text-align:center;
-    background:#f8fafc;
+.features{
+    list-style:none;
 }
 
-input[type=file]{
-    margin-top:20px;
-}
-
-.file-name{
-    margin-top:20px;
-    font-weight:600;
-    color:#2563eb;
-}
-
-.templates{
-    margin-top:40px;
-}
-
-.template{
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    padding:15px;
-    margin-top:10px;
-    cursor:pointer;
-}
-
-.template:hover{
-    background:#eff6ff;
-    border-color:#2563eb;
-}
-
-.template.selected{
-    background:#2563eb;
-    color:white;
-    border-color:#2563eb;
+.features li{
+    margin-bottom:16px;
 }
 
 .btn{
-    display:inline-block;
-    margin-top:30px;
-    padding:14px 24px;
-    background:#2563eb;
-    color:white;
+    display:block;
+    width:100%;
+    margin-top:35px;
+    padding:16px;
     border:none;
     border-radius:12px;
     cursor:pointer;
+    font-size:16px;
     font-weight:600;
 }
 
-.btn:hover{
+.btn-free{
+    background:#e5e7eb;
+    color:#111827;
+}
+
+.btn-pro{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-pro:hover{
     background:#1d4ed8;
 }
 
-.layout{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:30px;
-    margin-top:30px;
-}
+@media(max-width:1100px){
 
-@media(max-width:900px){
-
-    .layout{
+    .pricing{
         grid-template-columns:1fr;
     }
 
 }
+
 </style>
 </head>
 
@@ -132,214 +136,134 @@ input[type=file]{
 
 <div class="container">
 
-<div class="logo">
+    <div class="logo">
 
-    <img
-        src="logo.png"
-        alt="UGANDS"
-        style="height:180px;"
-    >
-
-</div>
-
-<div class="card">
-
-<h1>Upload Your File</h1>
-
-<p>
-Upload an Excel or CSV file and choose how you want to transform your data.
-</p>
-
-<div class="layout">
-
-<div class="upload-box">
-
-<h3>Select a file</h3>
-
-<input
-    type="file"
-    id="fileInput"
-    accept=".csv,.xlsx,.xls"
->
-
-<p id="selectedFile"></p>
-
-<div id="output"></div>
-
-<div id="fileName" class="file-name"></div>
-
-<hr style="margin:20px 0;">
-
-<h3>Or enter manually</h3>
-
-<textarea
-    id="participantsText"
-    rows="6"
-    placeholder="example1, example2, example3, example4"
-    style="
-        width:100%;
-        padding:12px;
-        border:1px solid #ddd;
-        border-radius:10px;
-        margin-top:10px;
-    "
-></textarea>
-
-</div>
-
-</div>
-
-<div class="templates">
-
-<h2>Choose Template</h2>
-
-<div class="template" data-template="attendance">
-✅ Attendance Tracker
-</div>
-
-<div class="template" data-template="inventory">
-📦 Inventory Manager
-</div>
-
-<div class="template" data-template="inspection">
-📋 Inspection Checklist
-</div>
-
-<div class="template" data-template="maintenance">
-🛠 Maintenance Register
-</div>
-
-<div style="margin-top:30px;">
-
-    <h2>Options</h2>
-
-    <div style="margin-top:20px;">
-
-        <label>
-            Application Title
-        </label>
-
-        <input
-            type="text"
-            id="appTitle"
-            value="Training Attendance"
-            style="
-                width:100%;
-                padding:12px;
-                margin-top:8px;
-                border:1px solid #ddd;
-                border-radius:10px;
-            "
+        <img
+            src="logo.png"
+            alt="UGANDS"
+            style="height:180px;"
         >
 
     </div>
 
-    <div style="margin-top:20px;">
+    <div class="hero">
 
-        <label>
-            <input
-                type="checkbox"
-                id="showTotal"
-                checked
-            >
-            Show Total Attendees
-        </label>
-
-    </div>
-
-    <div style="margin-top:10px;">
-
-        <label>
-            <input
-                type="checkbox"
-                id="showPresent"
-                checked
-            >
-            Show Present Count
-        </label>
-
-    </div>
-
-</div>
-
-
-<button class="btn" id="generateBtn">
-Generate Application
-</button>
-
-</div>
-
-</div>
-<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<div id="paywallModal" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.5);
-justify-content:center;
-align-items:center;
-z-index:9999;
-">
-
-    <div style="
-    background:white;
-    padding:30px;
-    border-radius:16px;
-    width:450px;
-    text-align:center;
-    ">
-
-        <h2>Free Plan Limit Reached</h2>
+        <h1>Choose Your Plan</h1>
 
         <p>
-            The free plan supports up to 10 participants.
+            Start free and upgrade when you need more.
         </p>
 
-        <button id="continueFreeBtn" class="btn">
-            Continue Free
-        </button>
+    </div>
+	
+	<div
+    id="userPlan"
+    style="
+    margin-top:20px;
+    font-weight:600;
+    color:#2563eb;
+    ">
+</div>
 
-        <br><br>
+    <div class="pricing">
 
-        <button id="loginBtn" class="btn">
-            Sign in with Google
-        </button>
+        <!-- FREE -->
 
-        <br><br>
+        <div class="card">
 
-        <button id="upgradeBtn" class="btn">
-            View Plans
-        </button>
+            <div class="plan">
+                FREE
+            </div>
+
+            <div class="price">
+                €0
+            </div>
+
+            <div class="period">
+                Forever
+            </div>
+
+            <ul class="features">
+                <li>✅ Up to 10 records</li>
+                <li>✅ PDF export with UGANDS logo</li>
+                <li>✅ Share links available for 1 day</li>
+            </ul>
+
+<button
+    id="freePlanBtn"
+    class="btn btn-free">
+    Current Plan
+</button>
+
+        </div>
+
+        <!-- PRO -->
+
+        <div class="card pro">
+
+            <div class="plan">
+                PRO
+            </div>
+
+            <div class="price">
+                €4.99
+            </div>
+
+            <div class="period">
+                per month
+            </div>
+
+            <ul class="features">
+                <li>✅ Unlimited records</li>
+                <li>✅ PDF export without UGANDS logo</li>
+                <li>✅ Share links available for 30 days</li>
+                <li>✅ Early access updates</li>
+            </ul>
+
+            <button
+                id="upgradeProBtn"
+                class="btn btn-pro">
+                Upgrade to Pro
+            </button>
+
+        </div>
+
+        <!-- BUSINESS -->
+
+        <div class="card">
+
+            <div class="plan">
+                BUSINESS
+            </div>
+
+            <div class="price">
+                €19.99
+            </div>
+
+            <div class="period">
+                per month
+            </div>
+
+            <ul class="features">
+                <li>✅ Everything included in Pro</li>
+                <li>✅ Possibility to use your company's logo on PDFs</li>
+            </ul>
+
+            <button
+                id="upgradeBusinessBtn"
+                class="btn btn-pro">
+                Upgrade to Business
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-
-const fileInput = document.getElementById("fileInput");
-const selectedFile = document.getElementById("selectedFile");
-const output = document.getElementById("output");
-const paywallModal =
-document.getElementById("paywallModal");
-
-const continueFreeBtn =
-document.getElementById("continueFreeBtn");
-
-const loginBtn =
-document.getElementById("loginBtn");
-
-const upgradeBtn =
-document.getElementById("upgradeBtn");
-
-let participants = [];
-let selectedTemplate = "attendance";
-let continueGeneration = false;
 
 const supabaseUrl =
 "https://jrowpoyottntwmpvqaks.supabase.co";
@@ -354,317 +278,57 @@ const db = createClient(
     supabaseKey
 );
 
-db.auth.onAuthStateChange((event, session) => {
+async function loadProfile() {
 
-});
+    const {
+        data: { user }
+    } = await db.auth.getUser();
 
-let currentUser = null;
-let currentProfile = null;
+    if (!user) return;
 
-async function loadUser() {
-
-    const { data } =
-        await db.auth.getSession();
-
-    if (!data.session) {
-        return;
-    }
-
-    currentUser = data.session.user;
-
-    const { data: profile, error } = await db
+    const { data: profile } = await db
         .from("profiles")
         .select("*")
-        .eq("id", currentUser.id)
+        .eq("id", user.id)
         .single();
 
-    currentProfile = profile;
+    document.getElementById("userPlan").innerText =
+        `Logged in as ${profile.full_name} • Plan: ${profile.plan.toUpperCase()}`;
+		
+	if (profile.plan === "pro") {
 
-    console.log("USER:", currentUser);
-    console.log("PROFILE:", currentProfile);
-    console.log("PROFILE ERROR:", error);
+    document.getElementById("upgradeProBtn")
+        .innerText = "Current Plan";
 
-}
-
-loadUser();
-
-fileInput.addEventListener("change", function(){
-
-    const file = fileInput.files[0];
-
-    if(!file) return;
-
-    selectedFile.innerHTML =
-        "✅ Selected file: " + file.name;
-
-    const reader = new FileReader();
-	
-	if(file.name.endsWith(".xlsx") ||
-   file.name.endsWith(".xls")){
-
-    reader.readAsArrayBuffer(file);
-
-} else {
-
-    reader.readAsText(file);
+    document.getElementById("upgradeProBtn")
+        .disabled = true;
 
 }
 
-reader.onload = function(e){
-
-    let rows = [];
-
-    if(
-        file.name.endsWith(".xlsx") ||
-        file.name.endsWith(".xls")
-    ){
-
-        const workbook =
-            XLSX.read(e.target.result, {
-                type: "array"
-            });
-
-        const sheet =
-            workbook.Sheets[
-                workbook.SheetNames[0]
-            ];
-
-        rows =
-            XLSX.utils.sheet_to_json(
-                sheet,
-                { header: 1 }
-            );
-
-    } else {
-
-        const text = e.target.result;
-
-        rows =
-            text.trim()
-                .split("\n")
-                .map(row => row.split(","));
-
-    }
-
-    participants = [];
-
-
-let html = `
-<h3>Attendance List</h3>
-<div style="
-max-width:500px;
-margin:auto;
-">
-`;
-
-for(let i = 1; i < rows.length; i++){
-
-    const cols = rows[i];
-
-    const nome = cols[0];
-
-    const presente =
-        (cols[1] || "no")
-        .toString()
-        .trim()
-        .toLowerCase();
-	
-	participants.push({
-    name: nome,
-    present: presente === "yes"
-});
-
-    html += `
-    <div style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        background:white;
-        padding:15px;
-        margin-bottom:10px;
-        border-radius:10px;
-        border:1px solid #ddd;
-    ">
-
-        <strong>${nome}</strong>
-
-        <button
-            onclick="
-                if(this.innerText==='NO'){
-                    this.innerText='YES';
-                    this.style.background='#16a34a';
-                }else{
-                    this.innerText='NO';
-                    this.style.background='#dc2626';
-                }
-            "
-            style="
-                width:70px;
-                border:none;
-                border-radius:8px;
-                padding:8px;
-                color:white;
-                cursor:pointer;
-                background:${presente === 'yes' ? '#16a34a' : '#dc2626'};
-            "
-        >
-            ${presente.toUpperCase()}
-        </button>
-
-    </div>
-    `;
+    console.log("PROFILE:", profile);
 
 }
 
-html += `</div>`;
+loadProfile();
 
-output.innerHTML = html;
+document
+.getElementById("upgradeProBtn")
+.addEventListener("click", () => {
 
-    };
+    window.open(
+        "https://buy.stripe.com/test_14AaEQ5hbf98gqYaUi5kk00",
+        "_blank"
+    );
 
 });
 
 document
-.getElementById("generateBtn")
-.addEventListener("click", async function(){
+.getElementById("upgradeBusinessBtn")
+.addEventListener("click", () => {
 
-const manualText =
-document.getElementById("participantsText")
-.value
-.trim();
-
-if(manualText && !continueGeneration){
-
-    participants = manualText
-        .split(/[\n,]+/)
-        .map(name => ({
-            name: name.trim(),
-            present: false
-        }))
-        .filter(p => p.name);
-
-}
-
-if (
-    participants.length > 10 &&
-    !continueGeneration &&
-    (
-        !currentProfile ||
-        currentProfile.plan !== "pro"
-    )
-) {
-
-    paywallModal.style.display = "flex";
-
-    return;
-}
-
-const appData = {
-
-    title:
-        document.getElementById("appTitle").value,
-
-    participants:
-        participants,
-
-    showTotal:
-        document.getElementById("showTotal").checked,
-
-    showPresent:
-        document.getElementById("showPresent").checked
-
-};
-
-const shareToken = crypto.randomUUID();
-
-const { data, error } = await db
-    .from("apps")
-    .insert([
-        {
-            template: selectedTemplate,
-            data: appData,
-            share_token: shareToken
-        }
-    ])
-    .select();
-	
-if(error){
-
-    console.log(error);
-    alert("Error saving application");
-
-    return;
-}
-continueGeneration = false;
-window.location.href =
-    `attendance.html?share=${data[0].share_token}`;
-
+    alert("Stripe Checkout coming next.");
 
 });
-
-const templates =
-document.querySelectorAll(".template");
-
-templates.forEach(template => {
-
-    template.addEventListener("click", function(){
-
-        templates.forEach(t => {
-            t.classList.remove("selected");
-        });
-
-        this.classList.add("selected");
-
-        selectedTemplate =
-        this.dataset.template;
-
-        console.log(
-            "Selected template:",
-            selectedTemplate
-        );
-
-    });
-
-});
-
-templates[0].classList.add("selected");
-
-continueFreeBtn.addEventListener("click", () => {
-
-    console.log("CONTINUE FREE CLICKED");
-
-    participants = participants.slice(0, 10);
-
-    continueGeneration = true;
-
-    paywallModal.style.display = "none";
-
-    document
-        .getElementById("generateBtn")
-        .click();
-
-});
-
-loginBtn.addEventListener("click", async () => {
-
-    const currentUrl = window.location.href;
-
-    await db.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-            redirectTo: currentUrl
-        }
-    });
-
-});
-
-upgradeBtn.addEventListener("click", () => {
-
-    window.location.href =
-        "pricing.html";
-
-});
-
 
 </script>
 
