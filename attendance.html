@@ -743,7 +743,37 @@ document
 .getElementById("shareBtn")
 .addEventListener("click", async () => {
 
+editableShareBtn.addEventListener(
+    "click",
+    async () => {
 
+        const link =
+            `${window.location.origin}${window.location.pathname}?share=${window.currentShareToken}&mode=editable`;
+
+        await navigator.clipboard.writeText(link);
+
+        shareModal.style.display = "none";
+
+        alert("Editable link copied!");
+
+    }
+);
+
+readonlyShareBtn.addEventListener(
+    "click",
+    async () => {
+
+        const link =
+            `${window.location.origin}${window.location.pathname}?share=${window.currentShareToken}&mode=readonly`;
+
+        await navigator.clipboard.writeText(link);
+
+        shareModal.style.display = "none";
+
+        alert("Read Only link copied!");
+
+    }
+);
 
     const { data } =
         await db.auth.getSession();
