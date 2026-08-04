@@ -658,8 +658,12 @@ document
 .getElementById("shareBtn")
 .addEventListener("click", async () => {
 
+
+
     const { data } =
         await db.auth.getSession();
+		
+		console.log("SESSION:", data.session);
 
     if (!data.session) {
         alert("Login required");
@@ -674,8 +678,12 @@ document
         .select("plan")
         .eq("id", userId)
         .single();
+		
+		console.log("PROFILE:", profile);
 
     let mode = "readonly";
+	
+	console.log("PLAN:", profile?.plan);
 
     if (profile?.plan === "pro") {
 
