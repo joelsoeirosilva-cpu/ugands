@@ -180,6 +180,15 @@ const db = supabase.createClient(
     supabaseKey
 );
 
+const shareModal =
+document.getElementById("shareModal");
+
+const editableShareBtn =
+document.getElementById("editableShareBtn");
+
+const readonlyShareBtn =
+document.getElementById("readonlyShareBtn");
+
 </script>
 
 <script>
@@ -685,18 +694,13 @@ document
 	
 	console.log("PLAN:", profile?.plan);
 
-    if (profile?.plan === "pro") {
+if (profile?.plan === "pro") {
 
-        const editable =
-            confirm(
-                "OK = Editable Link\n\nCancel = Read Only Link"
-            );
+    shareModal.style.display = "flex";
 
-        mode =
-            editable
-            ? "editable"
-            : "readonly";
-    }
+    return;
+}
+
 
     const link =
         `${window.location.origin}${window.location.pathname}?share=${window.currentShareToken}&mode=${mode}`;
@@ -730,5 +734,82 @@ document
 >
     Generating PDF...
 </div>
+
+<div id="shareModal" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.5);
+justify-content:center;
+align-items:center;
+z-index:9999;
+">
+
+    <div style="
+    background:white;
+    width:550px;
+    padding:30px;
+    border-radius:16px;
+    ">
+
+        <h2>Please let me know how do you want to share?</h2>
+
+        <div style="
+        margin-top:25px;
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+        ">
+
+            <button
+                id="editableShareBtn"
+                style="
+                padding:18px;
+                border:none;
+                border-radius:12px;
+                background:#16a34a;
+                color:white;
+                cursor:pointer;
+                text-align:left;
+                "
+            >
+                ✏️ Editable Link
+                <br>
+                <small>
+                    Recipients can update attendance,
+                    change statuses and edit data.
+                </small>
+            </button>
+
+            <button
+                id="readonlyShareBtn"
+                style="
+                padding:18px;
+                border:none;
+                border-radius:12px;
+                background:#f59e0b;
+                color:white;
+                cursor:pointer;
+                text-align:left;
+                "
+            >
+                🔒 Read Only Link
+                <br>
+                <small>
+                    Recipients can view data only.
+                    All editing actions are blocked.
+                </small>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 </body>
 </html>
