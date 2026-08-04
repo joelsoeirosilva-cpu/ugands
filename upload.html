@@ -422,8 +422,13 @@ async function loadUser() {
     document.getElementById("userInfo")
 );
 	
-	document.getElementById("userInfo").innerText =
-    `${currentProfile.email} • ${currentProfile.plan.toUpperCase()}`;
+const displayName =
+    currentProfile.email.includes("@ugands.local")
+        ? "Guest User"
+        : currentProfile.email;
+
+document.getElementById("userInfo").innerText =
+    `${displayName} • ${currentProfile.plan.toUpperCase()}`;
 
 }
 
