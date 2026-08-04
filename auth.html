@@ -47,6 +47,11 @@ button{
     color:white;
 }
 
+.guest{
+    background:#6b7280;
+    color:white;
+}
+
 </style>
 
 </head>
@@ -78,6 +83,13 @@ button{
         class="microsoft">
         Continue with Microsoft
     </button>
+	
+	<button
+    id="guestBtn"
+    class="guest">
+    Continue as Guest
+</button>
+
 
 </div>
 
@@ -154,6 +166,25 @@ document
                 "https://www.ugands.com/auth.html"
         }
     });
+
+});
+
+document
+.getElementById("guestBtn")
+.addEventListener("click", async () => {
+
+    const { data, error } =
+        await db.auth.signInAnonymously();
+
+    console.log(data);
+    console.log(error);
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    window.location.href = "upload.html";
 
 });
 
