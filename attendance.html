@@ -190,6 +190,11 @@ const params = new URLSearchParams(window.location.search);
 
 const appId = params.get("id");
 const shareToken = params.get("share");
+const shareMode =
+    params.get("mode") || "readonly";
+	
+const isReadOnly =
+    shareMode === "readonly";
 
 console.log("App ID:", appId);
 console.log("Share Token:", shareToken);
@@ -210,6 +215,24 @@ if (error) {
     console.log(error);
     alert("Application not found");
     return;
+}
+if (isReadOnly) {
+
+    document.body.insertAdjacentHTML(
+        "afterbegin",
+        `
+        <div style="
+            background:#f59e0b;
+            color:white;
+            padding:12px;
+            text-align:center;
+            font-weight:bold;
+        ">
+            🔒 READ ONLY MODE
+        </div>
+        `
+    );
+
 }
 const logoImg = new Image();
 logoImg.src = "logo.png";
@@ -320,6 +343,10 @@ document.getElementById(
 ).innerHTML = statsText;
 
 window.toggleStatus = async function(button, index){
+
+    if (isReadOnly) {
+        return;
+    }
 
     if(button.innerText === "NO"){
 
