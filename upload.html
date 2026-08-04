@@ -618,13 +618,24 @@ const appData = {
 
 const shareToken = crypto.randomUUID();
 
+const expiresAt =
+    currentProfile.plan === "pro"
+        ? new Date(
+            Date.now() + 30 * 24 * 60 * 60 * 1000
+          ).toISOString()
+        : new Date(
+            Date.now() + 1 * 24 * 60 * 60 * 1000
+          ).toISOString();
+
 const { data, error } = await db
     .from("apps")
     .insert([
         {
             template: selectedTemplate,
             data: appData,
-            share_token: shareToken
+            share_token: shareToken,
+            owner_id: currentUser.id,
+            expires_at: expiresAt
         }
     ])
     .select();
