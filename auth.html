@@ -100,9 +100,6 @@ const db = createClient(
 
 db.auth.onAuthStateChange((event, session) => {
 
-    console.log("EVENT:", event);
-    console.log("SESSION:", session);
-
     if (session) {
         window.location.href = "upload.html";
     }
@@ -111,7 +108,7 @@ db.auth.onAuthStateChange((event, session) => {
 
 db.auth.getSession().then(({ data }) => {
 
-    console.log("SESSION:", data.session);
+
 });
 
 async function checkSession() {
@@ -120,7 +117,6 @@ async function checkSession() {
         data: { session }
     } = await db.auth.getSession();
 
-    console.log("AUTH SESSION:", session);
 
     if (session) {
 
@@ -131,9 +127,7 @@ async function checkSession() {
 
 }
 
-setTimeout(() => {
-    checkSession();
-}, 2000);
+checkSession();
 
 document
 .getElementById("googleBtn")
