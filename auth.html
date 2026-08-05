@@ -112,7 +112,10 @@ const db = createClient(
 
 db.auth.onAuthStateChange((event, session) => {
 
-    if (session) {
+    if (
+        session &&
+        !session.user.is_anonymous
+    ) {
         window.location.href = "upload.html";
     }
 
@@ -129,8 +132,10 @@ async function checkSession() {
         data: { session }
     } = await db.auth.getSession();
 
-
-    if (session) {
+    if (
+        session &&
+        !session.user.is_anonymous
+    ) {
 
         window.location.href =
             "upload.html";
