@@ -486,7 +486,9 @@ z-index:9999;
         border-bottom:1px solid #e5e7eb;
         ">
 
-            <h2>Data Preview</h2>
+        <h2 id="previewTitle">
+    Data Preview
+</h2>
 
             <button
                 id="closePreviewBtn"
@@ -893,6 +895,10 @@ document
 .getElementById("previewBtn")
 .addEventListener("click", () => {
 
+	document.getElementById(
+    "previewTitle"
+).innerText =
+    `Data Preview (${participants.length} records)`;
     document.getElementById(
         "previewContent"
     ).innerHTML =
