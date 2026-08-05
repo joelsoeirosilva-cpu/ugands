@@ -324,20 +324,21 @@ z-index:9999;
     text-align:center;
     ">
 
-        <h2>Free Plan Limit Reached</h2>
+        <h2>You've reached the free limit</h2>
 
         <p>
-            The free plan supports up to 10 participants.
+            Your list contains more than 10 records. 
+			Please choose one of the options below.
         </p>
 
         <button id="continueFreeBtn" class="btn">
-            Continue Free
+            Continue with 10 records
         </button>
 
         <br><br>
 
         <button id="loginBtn" class="btn">
-            Sign in with Google
+            Sign in 
         </button>
 
         <br><br>
@@ -702,16 +703,9 @@ continueFreeBtn.addEventListener("click", () => {
 
 });
 
-loginBtn.addEventListener("click", async () => {
+loginBtn.addEventListener("click", () => {
 
-    const currentUrl = window.location.href;
-
-    await db.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-            redirectTo: currentUrl
-        }
-    });
+    window.location.href = "auth.html";
 
 });
 
