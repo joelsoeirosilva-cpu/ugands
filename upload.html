@@ -231,6 +231,22 @@ margin-bottom:20px;
 
 </div>
 
+<button
+    id="previewBtn"
+    style="
+        margin-top:20px;
+        padding:12px 20px;
+        border:none;
+        border-radius:10px;
+        background:#2563eb;
+        color:white;
+        cursor:pointer;
+        font-weight:600;
+    "
+>
+    Preview Data
+</button>
+
 <div id="manualSection" style="display:none;">
 
 <h3>Or enter manually</h3>
@@ -652,7 +668,7 @@ for(let i = 1; i < rows.length; i++){
 
 html += `</div>`;
 
-output.innerHTML = html;
+window.previewHtml = html;
 
     };
 
