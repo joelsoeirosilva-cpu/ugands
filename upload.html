@@ -895,21 +895,90 @@ document
 .getElementById("previewBtn")
 .addEventListener("click", () => {
 
-	document.getElementById(
-    "previewTitle"
-).innerText =
-    `Data Preview (${participants.length} records)`;
-    document.getElementById(
-        "previewContent"
-    ).innerHTML =
-        window.previewHtml || "";
+    const mode =
+        document.querySelector(
+            'input[name="inputMode"]:checked'
+        ).value;
+
+    if (mode === "manual") {
+
+        const manualText =
+            document.getElementById(
+                "participantsText"
+            ).value.trim();
+
+        const manualParticipants =
+            manualText
+                .split(/[\n,]+/)
+                .map(name => name.trim())
+                .filter(name => name);
+
+        let html = `
+        <h3>Attendance List</h3>
+        <div style="max-width:500px;margin:auto;">
+        `;
+
+        manualParticipants.forEach(name => {
+
+            html += `
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                background:white;
+                padding:15px;
+                margin-bottom:10px;
+                border-radius:10px;
+                border:1px solid #ddd;
+            ">
+
+                <strong>${name}</strong>
+
+                <button
+                    style="
+                    width:70px;
+                    border:none;
+                    border-radius:8px;
+                    padding:8px;
+                    color:white;
+                    background:#dc2626;
+                    ">
+                    NO
+                </button>
+
+            </div>
+            `;
+
+        });
+
+        document.getElementById(
+            "previewTitle"
+        ).innerText =
+            `Data Preview • ${manualParticipants.length} Records`;
+
+        document.getElementById(
+            "previewContent"
+        ).innerHTML = html;
+
+    } else {
+
+        document.getElementById(
+            "previewTitle"
+        ).innerText =
+            `Data Preview • ${participants.length} Records`;
+
+        document.getElementById(
+            "previewContent"
+        ).innerHTML =
+            window.previewHtml || "";
+
+    }
 
     document.getElementById(
         "previewModal"
     ).style.display = "flex";
 
 });
-
 document
 .getElementById("closePreviewBtn")
 .addEventListener("click", () => {
