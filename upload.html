@@ -213,6 +213,8 @@ margin-bottom:20px;
 
 <div class="upload-box">
 
+<div id="fileSection">
+
 <h3>Select a file</h3>
 
 <input
@@ -227,7 +229,9 @@ margin-bottom:20px;
 
 <div id="fileName" class="file-name"></div>
 
-<hr style="margin:20px 0;">
+</div>
+
+<div id="manualSection" style="display:none;">
 
 <h3>Or enter manually</h3>
 
@@ -243,6 +247,8 @@ margin-bottom:20px;
         margin-top:10px;
     "
 ></textarea>
+
+</div>
 
 </div>
 
@@ -803,6 +809,35 @@ logoutBtn.addEventListener("click", async () => {
 
     window.location.href =
         "auth.html";
+
+});
+
+document
+.querySelectorAll('input[name="inputMode"]')
+.forEach(radio => {
+
+    radio.addEventListener("change", () => {
+
+        const mode =
+            document.querySelector(
+                'input[name="inputMode"]:checked'
+            ).value;
+
+        document.getElementById(
+            "fileSection"
+        ).style.display =
+            mode === "file"
+                ? "block"
+                : "none";
+
+        document.getElementById(
+            "manualSection"
+        ).style.display =
+            mode === "manual"
+                ? "block"
+                : "none";
+
+    });
 
 });
 
