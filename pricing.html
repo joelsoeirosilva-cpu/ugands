@@ -198,7 +198,7 @@ margin-bottom:10px;
 <button
     id="freePlanBtn"
     class="btn btn-free">
-    Current Plan
+    Continue with Free
 </button>
 
         </div>
@@ -310,7 +310,7 @@ margin-bottom:20px;
             <button
                 id="upgradeBusinessBtn"
                 class="btn btn-pro">
-                Upgrade to Business
+                Contact Us
             </button>
 
         </div>
@@ -384,7 +384,16 @@ document
 .getElementById("upgradeBusinessBtn")
 .addEventListener("click", () => {
 
-    alert("Stripe Checkout coming next.");
+    window.location.href =
+        "mailto:contact@ugands.com";
+
+});
+
+document
+.getElementById("freePlanBtn")
+.addEventListener("click", () => {
+
+    window.location.href = "upload.html";
 
 });
 
