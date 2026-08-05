@@ -110,8 +110,11 @@ body{
 }
 
 .btn-free{
-    background:#e5e7eb;
-    color:#111827;
+    background:#2563eb;
+    color:white;
+}
+.btn-free:hover{
+    background:#1d4ed8;
 }
 
 .btn-pro{
@@ -350,8 +353,13 @@ async function loadProfile() {
         .eq("id", user.id)
         .single();
 
-    document.getElementById("userPlan").innerText =
-        `Logged in as ${profile.full_name} • Plan: ${profile.plan.toUpperCase()}`;
+const displayName =
+    profile.full_name ||
+    profile.email ||
+    "Guest User";
+
+document.getElementById("userPlan").innerText =
+    `Logged in as ${displayName} • Plan: ${profile.plan.toUpperCase()}`;
 		
 	if (profile.plan === "pro") {
 
