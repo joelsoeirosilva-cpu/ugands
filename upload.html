@@ -671,6 +671,7 @@ for(let i = 1; i < rows.length; i++){
 html += `</div>`;
 
 window.previewHtml = html;
+window.previewParticipants = participants;
 
     };
 
@@ -827,6 +828,15 @@ logoutBtn.addEventListener("click", async () => {
 
     window.location.href =
         "auth.html";
+
+});
+
+document
+.getElementById("previewBtn")
+.addEventListener("click", () => {
+
+    document.getElementById("output").innerHTML =
+        window.previewHtml || "";
 
 });
 
