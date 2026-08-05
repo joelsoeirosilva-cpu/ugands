@@ -354,9 +354,13 @@ async function loadProfile() {
         .single();
 
 const displayName =
-    profile.full_name ||
-    profile.email ||
-    "Guest User";
+    profile.email?.includes("@ugands.local")
+        ? "Guest User"
+        : (
+            profile.full_name ||
+            profile.email ||
+            "User"
+          );
 
 document.getElementById("userPlan").innerText =
     `Logged in as ${displayName} • Plan: ${profile.plan.toUpperCase()}`;
