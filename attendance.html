@@ -524,8 +524,26 @@ function updateStats(){
 
     const total = buttons.length;
 
+    let statsText = "";
+
+    if(window.appData.showTotal){
+
+        statsText += `Total: ${total}`;
+
+    }
+
+    if(window.appData.showPresent){
+
+        if(statsText !== ""){
+            statsText += " | ";
+        }
+
+        statsText += `Present: ${present}`;
+
+    }
+
     document.getElementById("stats").innerHTML =
-        `Total: ${total} | Present: ${present}`;
+        statsText;
 
 }
 
@@ -552,7 +570,7 @@ setTimeout(() => {
 
     doc.setFont(undefined, "bold");
 
-    doc.text("Participant", 25, y);
+    doc.text("List", 25, y);
     doc.text("Status", 150, y);
 
     doc.setFont(undefined, "normal");
