@@ -10,8 +10,12 @@
 
 body{
     font-family:Arial,sans-serif;
-    background:#f5f7fb;
     padding:40px;
+    background:#ffffff;
+    background-image:
+        linear-gradient(#edf2f7 1px, transparent 1px),
+        linear-gradient(90deg,#edf2f7 1px, transparent 1px);
+    background-size:50px 50px;
 }
 
 .container{
@@ -64,9 +68,26 @@ h1{
 
 <div class="container">
 
-    <div class="card">
+<div class="card">
 
-		<h1 id="pageTitle"></h1>
+    <div style="
+    margin-bottom:20px;
+    ">
+
+        <a
+            href="upload.html"
+            style="
+            color:#2563eb;
+            font-weight:600;
+            text-decoration:none;
+            "
+        >
+            ← Create Another App
+        </a>
+
+    </div>
+
+    <h1 id="pageTitle"></h1>
 
 <div style="
 display:flex;
