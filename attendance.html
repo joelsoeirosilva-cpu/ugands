@@ -731,38 +731,50 @@ setTimeout(() => {
     const presentCount =
         participants.filter(p => p.present).length;
 
-doc.addImage(
-    logoImg,
-    "PNG",
-    45,
-    10,
-    120,
-    38
-);
+if(pdfMode === "branded"){
+
+    doc.addImage(
+        logoImg,
+        "PNG",
+        45,
+        10,
+        120,
+        38
+    );
+
+}
 
     doc.setFontSize(12);
+
+const startY =
+    pdfMode === "professional"
+        ? 25
+        : 70;
 
 doc.setFont(undefined, "bold");
 doc.setFontSize(18);
 doc.setTextColor(37, 99, 235);
 
-doc.text(title, 20, 70);
+doc.text(title, 20, startY);
 
 doc.setTextColor(0, 0, 0);
 
 doc.setFont(undefined, "normal");
 doc.setFontSize(12);
 doc.setFont(undefined, "bold");
-doc.text("Date:", 145, 70);
+doc.text("Date:", 145, startY);
 
 doc.setFont(undefined, "normal");
 doc.setTextColor(37, 99, 235);
 
-doc.text(date, 160, 70);
+doc.text(date, 160, startY);
 
 doc.setTextColor(0, 0, 0);
 
-let y = 90;
+let y =
+    pdfMode === "professional"
+        ? 45
+        : 90;
 
 drawTableHeader(y);
 
@@ -864,22 +876,26 @@ const fileName =
 
 doc.setDrawColor(220,220,220);
 
-doc.line(
-    60,
-    284,
-    150,
-    284
-);
+if(pdfMode === "branded"){
 
-doc.setFontSize(9);
-doc.setTextColor(120,120,120);
+    doc.line(
+        60,
+        284,
+        150,
+        284
+    );
 
-doc.text(
-    "Generated with UGANDS.com",
-    105,
-    280,
-    { align: "center" }
-);
+    doc.setFontSize(9);
+    doc.setTextColor(120,120,120);
+
+    doc.text(
+        "Generated with UGANDS.com",
+        105,
+        280,
+        { align: "center" }
+    );
+
+}
 
 doc.setTextColor(0,0,0);
 doc.setFontSize(12);
