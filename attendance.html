@@ -381,6 +381,7 @@ document.getElementById("brandedPdfBtn");
 
 const professionalPdfBtn =
 document.getElementById("professionalPdfBtn");
+let pdfMode = "branded";
 
 </script>
 
@@ -907,6 +908,23 @@ editableShareBtn.addEventListener(
         alert("Editable link copied!");
 
     }
+);
+brandedPdfBtn.addEventListener(
+    "click",
+    () => {
+
+        pdfModal.style.display = "none";
+
+        alert("Branded PDF");
+
+    }
+);
+professionalPdfBtn.addEventListener(
+"click",
+() =>{
+pdfModal.style.display = "none";
+alert("Professional PDF");
+}
 );
 
 readonlyShareBtn.addEventListener(
