@@ -125,6 +125,80 @@ input[type=file]{
     }
 
 }
+.generate-section{
+    margin-top:30px;
+}
+
+.generate-card{
+    max-width:1500px;
+    margin:auto;
+
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:24px;
+
+    padding:30px 40px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.05);
+}
+
+.generate-text h2{
+    margin:0;
+    font-size:28px;
+}
+
+.generate-text p{
+    margin-top:10px;
+    margin-bottom:0;
+    color:#64748b;
+}
+
+.generate-cta{
+    border:none;
+
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+    color:white;
+
+    padding:20px 40px;
+
+    border-radius:16px;
+
+    font-size:18px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 12px 24px rgba(37,99,235,.35);
+
+    transition:.2s;
+}
+
+.generate-cta:hover{
+    transform:translateY(-3px);
+    box-shadow:
+        0 18px 35px rgba(37,99,235,.45);
+}
+
+@media(max-width:900px){
+
+    .generate-card{
+        flex-direction:column;
+        text-align:center;
+        gap:20px;
+    }
+
+}
 </style>
 </head>
 
@@ -515,11 +589,24 @@ z-index:9999;
 
 </div>
 
-<div class="generate-wrapper">
+<div class="generate-section">
 
-<button class="generate-wrapper" id="generateBtn">
-Generate Application
-</button>
+    <div class="generate-card">
+
+        <div class="generate-text">
+            <h2>Ready to Build Your App?</h2>
+            <p>
+                Your data is loaded and your template is selected.
+                Generate the application and start using it instantly.
+            </p>
+        </div>
+
+        <button class="generate-cta" id="generateBtn">
+            🚀 Generate Application
+        </button>
+
+    </div>
+
 </div>
 
 <script>
