@@ -66,6 +66,12 @@ h1{
 </head>
 <body>
 
+<img
+    id="logoPdf"
+    src="logo.png"
+    style="display:none;"
+>
+
 <div class="container">
 
 <div class="card">
@@ -615,14 +621,18 @@ setTimeout(() => {
     const presentCount =
         participants.filter(p => p.present).length;
 
+const logoPdf =
+document.getElementById("logoPdf");
+
 doc.addImage(
-    logoImg,
+    logoPdf,
     "PNG",
     45,
     10,
     120,
     38
 );
+
 
     doc.setFontSize(12);
 
