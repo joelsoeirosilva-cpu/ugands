@@ -26,7 +26,7 @@ body{
 }
 
 .container{
-    max-width:900px;
+    max-width:1400px;
     margin:auto;
     padding:25px 20px;
 }
@@ -113,7 +113,7 @@ input[type=file]{
 
 .layout{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1.2fr 1fr 1fr;
     gap:30px;
     margin-top:30px;
 }
@@ -286,35 +286,37 @@ margin-bottom:20px;
 
 </div>
 
+<!-- Templates -->
 <div class="templates">
 
-<h2>Choose Template</h2>
+    <h2>Choose Template</h2>
 
-<div class="template" data-template="attendance">
-✅ List Tracker
+    <div class="template selected" data-template="attendance">
+        ✅ List Tracker
+    </div>
+
+    <div class="template" data-template="inventory">
+        📦 Inventory Manager
+    </div>
+
+    <div class="template" data-template="inspection">
+        📋 Inspection Checklist
+    </div>
+
+    <div class="template" data-template="maintenance">
+        🛠 Maintenance Register
+    </div>
+
 </div>
 
-<div class="template" data-template="inventory">
-📦 Inventory Manager
-</div>
-
-<div class="template" data-template="inspection">
-📋 Inspection Checklist
-</div>
-
-<div class="template" data-template="maintenance">
-🛠 Maintenance Register
-</div>
-
-<div style="margin-top:30px;">
+<!-- Options -->
+<div>
 
     <h2>Options</h2>
 
     <div style="margin-top:20px;">
 
-        <label>
-            Application Title
-        </label>
+        <label>Application Title</label>
 
         <input
             type="text"
@@ -332,29 +334,17 @@ margin-bottom:20px;
     </div>
 
     <div style="margin-top:20px;">
-
         <label>
-            <input
-                type="checkbox"
-                id="showTotal"
-                checked
-            >
+            <input type="checkbox" id="showTotal" checked>
             Show Total Attendees
         </label>
-
     </div>
 
     <div style="margin-top:10px;">
-
         <label>
-            <input
-                type="checkbox"
-                id="showPresent"
-                checked
-            >
+            <input type="checkbox" id="showPresent" checked>
             Show Present Count
         </label>
-
     </div>
 
 </div>
