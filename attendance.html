@@ -210,6 +210,68 @@ justify-content:center;
 align-items:center;
 z-index:9999;
 ">
+
+</div>
+
+    <div style="
+    background:white;
+    width:550px;
+    padding:30px;
+    border-radius:16px;
+    ">
+
+        <h2>Please let me know how do you want to share?</h2>
+
+        <div style="
+        margin-top:25px;
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+        ">
+
+            <button
+                id="editableShareBtn"
+                style="
+                padding:18px;
+                border:none;
+                border-radius:12px;
+                background:#16a34a;
+                color:white;
+                cursor:pointer;
+                text-align:left;
+                "
+            >
+                ✏️ Editable Link
+                <br>
+                <small>
+                    Recipients can update attendance,
+                    change statuses and edit data.
+                </small>
+            </button>
+
+            <button
+                id="readonlyShareBtn"
+                style="
+                padding:18px;
+                border:none;
+                border-radius:12px;
+                background:#f59e0b;
+                color:white;
+                cursor:pointer;
+                text-align:left;
+                "
+            >
+                🔒 Read Only Link
+                <br>
+                <small>
+                    Recipients can view data only.
+                    All editing actions are blocked.
+                </small>
+            </button>
+
+        </div>
+
+    </div>
 <div id="pdfModal" style="
 display:none;
 position:fixed;
@@ -282,69 +344,6 @@ z-index:9999;
         </div>
 
     </div>
-
-</div>
-
-    <div style="
-    background:white;
-    width:550px;
-    padding:30px;
-    border-radius:16px;
-    ">
-
-        <h2>Please let me know how do you want to share?</h2>
-
-        <div style="
-        margin-top:25px;
-        display:flex;
-        flex-direction:column;
-        gap:15px;
-        ">
-
-            <button
-                id="editableShareBtn"
-                style="
-                padding:18px;
-                border:none;
-                border-radius:12px;
-                background:#16a34a;
-                color:white;
-                cursor:pointer;
-                text-align:left;
-                "
-            >
-                ✏️ Editable Link
-                <br>
-                <small>
-                    Recipients can update attendance,
-                    change statuses and edit data.
-                </small>
-            </button>
-
-            <button
-                id="readonlyShareBtn"
-                style="
-                padding:18px;
-                border:none;
-                border-radius:12px;
-                background:#f59e0b;
-                color:white;
-                cursor:pointer;
-                text-align:left;
-                "
-            >
-                🔒 Read Only Link
-                <br>
-                <small>
-                    Recipients can view data only.
-                    All editing actions are blocked.
-                </small>
-            </button>
-
-        </div>
-
-    </div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
