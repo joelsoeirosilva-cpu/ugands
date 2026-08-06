@@ -88,13 +88,17 @@ nav{
 }
 
 .hero{
-    max-width:1400px;
+    max-width:1600px;
     margin:auto;
-    padding:80px 40px;
+    padding:40px 60px;
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:80px;
-    align-items:start;
+    grid-template-columns:40% 60%;
+    gap:60px;
+    align-items:center;
+	
+	hero.left{
+	max-width:600px;
+	}
 }
 
 .badge{
@@ -146,8 +150,8 @@ nav{
 
 .mockup{
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     gap:25px;
 }
 
@@ -340,7 +344,7 @@ footer{
 
 <section class="hero">
 
-    <div>
+    <div class="hero-left">
 
         <div class="badge">
             • No-code data transformation
@@ -361,15 +365,15 @@ footer{
             <li>No manual setup</li>
         </ul>
 
-<div class="buttons">
+        <a href="auth.html" class="btn-primary">
+            Try It Free
+        </a>
 
-</div>
-
-</div>
+    </div>
 
     <div class="mockup">
 
-        <div class="excel-card">
+               <div class="excel-card">
 
             <div class="card-header green">
                 ● RH Department.XLSX
@@ -438,6 +442,8 @@ footer{
         </div>
 
     </div>
+
+</section>
 
 </section>
 
