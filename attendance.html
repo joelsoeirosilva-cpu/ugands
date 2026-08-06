@@ -1,3 +1,4 @@
+@@ -1,863 +1,884 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,7 @@
 
 body{
     font-family:Arial,sans-serif;
+    background:#f5f7fb;
     padding:40px;
     background:#ffffff;
     background-image:
@@ -65,42 +67,13 @@ h1{
 </style>
 </head>
 <body>
-<div
-    class="logo"
-    style="
-        text-align:center;
-        margin-bottom:20px;
-    "
->
 
-    <img
-        src="logo.png"
-        alt="UGANDS"
-        style="height:180px;"
-    >
-
-</div>
-``
-
-<div
-    style="
-    text-align:center;
-    margin-bottom:20px;
-    ">
-
-    <span
-        id="userInfo"
-        style="
-        font-weight:600;
-        color:#2563eb;
-        ">
-    </span>
-
-</div>
 <div class="container">
 
+    <div class="card">
 <div class="card">
 
+		<h1 id="pageTitle"></h1>
     <div style="
     margin-bottom:20px;
     ">
@@ -164,7 +137,7 @@ margin-bottom:20px;
 >
 
         <div id="attendanceList"></div>
-		
+
 		<div style="
 margin-top:25px;
 text-align:right;
@@ -307,11 +280,6 @@ const db = supabase.createClient(
     supabaseUrl,
     supabaseKey
 );
-const logoImg = new Image();
-logoImg.src = "logo.png";
-logoImg.onload = () => {
-    console.log("LOGO LOADED");
-};
 
 const shareModal =
 document.getElementById("shareModal");
@@ -334,7 +302,7 @@ const appId = params.get("id");
 const shareToken = params.get("share");
 const shareMode =
     params.get("mode") || "readonly";
-	
+
 const isReadOnly =
     shareMode === "readonly";
 
@@ -376,7 +344,8 @@ if (isReadOnly) {
     );
 
 }
-
+const logoImg = new Image();
+logoImg.src = "logo.png";
 window.participants = data.data.participants || [];
 const participants = window.participants;
 
@@ -440,7 +409,7 @@ document.getElementById(
 ).value =
   data.data.attendanceDate ||
   new Date().toISOString().split("T")[0];
-  
+
 if (isReadOnly) {
 
     document.getElementById(
@@ -448,7 +417,7 @@ if (isReadOnly) {
     ).disabled = true;
 
 }
-  
+
 document
   .getElementById("attendanceDate")
   .addEventListener("change", async function() {
@@ -510,7 +479,7 @@ window.toggleStatus = async function(button, index){
         button.innerText = "YES";
         button.classList.remove("no");
         button.classList.add("yes");
-		
+
 		participants[index].present = true;
 
     } else {
@@ -518,11 +487,11 @@ window.toggleStatus = async function(button, index){
         button.innerText = "NO";
         button.classList.remove("yes");
         button.classList.add("no");
-		
+
 		participants[index].present = false;
 
     }
-	
+
 const { data: result, error } = await db
   .from("apps")
   .update({
@@ -614,7 +583,7 @@ document.getElementById(
 setTimeout(() => {
 
     const { jsPDF } = window.jspdf;
-	
+
 	function drawTableHeader(y) {
 
     doc.setDrawColor(200, 200, 200);
@@ -646,8 +615,14 @@ setTimeout(() => {
     const presentCount =
         participants.filter(p => p.present).length;
 
-const logoPdf =
-document.getElementById("logoPdf");
+doc.addImage(
+    logoImg,
+    "PNG",
+    45,
+    10,
+    120,
+    38
+);
 
     doc.setFontSize(12);
 
@@ -770,7 +745,7 @@ doc.setFont(undefined, "normal");
 doc.setFont(undefined, "normal");
 const fileName =
     title.replaceAll(" ", "-");
-	
+
 doc.setDrawColor(220,220,220);
 
 doc.line(
@@ -846,7 +821,7 @@ document
 
     const { data } =
         await db.auth.getSession();
-		
+
 		console.log("SESSION:", data.session);
 
     if (!data.session) {
@@ -862,11 +837,11 @@ document
         .select("plan")
         .eq("id", userId)
         .single();
-		
+
 		console.log("PROFILE:", profile);
 
     let mode = "readonly";
-	
+
 	console.log("PLAN:", profile?.plan);
 
 if (profile?.plan === "pro") {
