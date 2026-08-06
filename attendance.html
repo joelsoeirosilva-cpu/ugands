@@ -278,6 +278,9 @@ const db = supabase.createClient(
 );
 const logoImg = new Image();
 logoImg.src = "logo.png";
+logoImg.onload = () => {
+    console.log("LOGO LOADED");
+};
 
 const shareModal =
 document.getElementById("shareModal");
