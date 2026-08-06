@@ -66,11 +66,7 @@ h1{
 </head>
 <body>
 
-<img
-    id="logoPdf"
-    src="logo.png"
-    style="display:none;"
->
+<img src="logo.png">
 
 <div class="container">
 
@@ -623,16 +619,6 @@ setTimeout(() => {
 
 const logoPdf =
 document.getElementById("logoPdf");
-
-doc.addImage(
-    logoPdf,
-    "PNG",
-    45,
-    10,
-    120,
-    38
-);
-
 
     doc.setFontSize(12);
 
