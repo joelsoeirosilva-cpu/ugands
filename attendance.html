@@ -681,7 +681,11 @@ const { data: profile } = await db
     .eq("id", userId)
     .single();
 
-if (profile?.plan === "pro") {
+if (
+    profile?.plan === "pro" &&
+    pdfMode !== "professional" &&
+    pdfMode !== "branded"
+) {
 
     pdfModal.style.display = "flex";
 
@@ -915,16 +919,23 @@ brandedPdfBtn.addEventListener(
 
         pdfModal.style.display = "none";
 
-        alert("Branded PDF");
+        pdfMode = "branded";
+
+document.getElementById("pdfBtn").click();
 
     }
 );
 professionalPdfBtn.addEventListener(
-"click",
-() =>{
-pdfModal.style.display = "none";
-alert("Professional PDF");
-}
+    "click",
+    () => {
+
+        pdfModal.style.display = "none";
+
+        pdfMode = "professional";
+
+        document.getElementById("pdfBtn").click();
+
+    }
 );
 
 readonlyShareBtn.addEventListener(
