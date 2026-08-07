@@ -882,21 +882,38 @@ if (
     return;
 }
 
-const appData = {
+let appData;
 
-    title:
-        document.getElementById("appTitle").value,
+if(selectedTemplate === "pricelist"){
 
-    participants:
-        participants,
+    appData = {
 
-    showTotal:
-        document.getElementById("showTotal").checked,
+        title:
+            document.getElementById("appTitle").value,
 
-    showPresent:
-        document.getElementById("showPresent").checked
+        items: items
 
-};
+    };
+
+} else {
+
+    appData = {
+
+        title:
+            document.getElementById("appTitle").value,
+
+        participants:
+            participants,
+
+        showTotal:
+            document.getElementById("showTotal").checked,
+
+        showPresent:
+            document.getElementById("showPresent").checked
+
+    };
+
+}
 
 const shareToken = crypto.randomUUID();
 
