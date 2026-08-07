@@ -448,6 +448,12 @@ function generatePriceListPdf(){
     let y = 40;
 
     items.forEach(item => {
+	
+	console.log(
+    "DRAW:",
+    item.product,
+    item.price
+);
 
         doc.text(
             item.product,
