@@ -389,23 +389,11 @@ let pdfMode = null;
 
 function renderPriceList(data) {
 
-    document.getElementById(
-        "pageTitle"
-    ).innerText =
+    document.getElementById("pageTitle").innerText =
         data.data.title || "Price List";
 
-    document.getElementById(
-        "attendanceList"
-    ).innerHTML = `
-        <div style="
-            padding:20px;
-            text-align:center;
-            font-weight:bold;
-            border:1px solid #e5e7eb;
-            border-radius:12px;
-        ">
-            Price List Template
-        </div>
+    document.getElementById("attendanceList").innerHTML = `
+        <h2>Price List Template</h2>
     `;
 
 }
@@ -452,12 +440,9 @@ switch (template) {
     case "attendance":
         break;
 
-case "pricelist":
-
-    document.getElementById("pageTitle").innerText =
-        "Price List";
-
-    return;
+    case "pricelist":
+        renderPriceList(data);
+        return;
 
 }
 if (isReadOnly) {
