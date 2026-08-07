@@ -489,6 +489,8 @@ switch (template) {
         break;
 
     case "pricelist":
+		window.appTitle = data.data.title;
+		window.appData = data.data;
         renderPriceList(data);
         return;
 
