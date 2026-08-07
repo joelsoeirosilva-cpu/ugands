@@ -635,6 +635,7 @@ const logoutBtn =
 document.getElementById("logoutBtn");
 
 let participants = [];
+let items = [];
 let selectedTemplate = "attendance";
 let continueGeneration = false;
 
@@ -757,6 +758,7 @@ reader.onload = function(e){
     }
 
     participants = [];
+	items = [];
 
 
 let html = `
@@ -770,6 +772,16 @@ margin:auto;
 for(let i = 1; i < rows.length; i++){
 
     const cols = rows[i];
+	
+	if(selectedTemplate === "pricelist"){
+
+    items.push({
+        product: cols[0],
+        price: ""
+    });
+
+    continue;
+}
 
     const nome = cols[0];
 
