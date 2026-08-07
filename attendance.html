@@ -388,13 +388,22 @@ let pdfMode = null;
 <script>
 
 function renderPriceList(data) {
-
+const items = data.data.items || [];
     document.getElementById("pageTitle").innerText =
         data.data.title || "Price List";
+let html="";
 
-    document.getElementById("attendanceList").innerHTML = `
-        <h2>Price List Template</h2>
+items.forEach(item => {
+
+    html += `
+        <div>
+            ${item.product}
+        </div>
     `;
+
+});	
+document.getElementById("attendanceList").innerHTML =
+    html;
 	
 	document.getElementById("attendanceDate")
     .parentElement.style.display = "none";
