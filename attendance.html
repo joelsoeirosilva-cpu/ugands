@@ -389,6 +389,8 @@ let pdfMode = null;
 
 function renderPriceList(data) {
 const items = data.data.items || [];
+window.priceItems = items;
+
     document.getElementById("pageTitle").innerText =
         data.data.title || "Price List";
 let html="";
@@ -402,7 +404,7 @@ html = `
         <th>Price</th>
     </tr>
 `;
-items.forEach(item => {
+items.forEach((item, index) => {
 
 html += `
 <tr>
@@ -422,6 +424,7 @@ html += `
             type="number"
             value="${item.price}"
             placeholder="0.00"
+			onchange="updatePrice(${index}, this.value)"
         >
     </td>
 </tr>
@@ -434,6 +437,20 @@ document.getElementById("attendanceList").innerHTML =
     html;
 
 }
+
+window.updatePrice = function(index, value){
+
+    console.log(
+        "Product:",
+        window.priceItems[index].product
+    );
+
+    console.log(
+        "Price:",
+        value
+    );
+
+};
 
 async function loadApplication() {
 
