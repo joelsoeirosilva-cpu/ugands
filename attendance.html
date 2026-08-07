@@ -422,9 +422,12 @@ items.forEach((item, index) => {
 
 document.getElementById("attendanceList").innerHTML =
     html;
-	
-	console.log("price list render");
 
+document.getElementById("pdfBtn")
+.onclick = function(){
+alert("Price pdf");
+}
+	
 }
 
 window.updatePrice = async function(index, value){
