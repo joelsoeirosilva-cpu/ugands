@@ -455,6 +455,8 @@ items: window.priceItems
 window.currentShareToken
 );
 
+console.log("SAVED");
+
 };
 
 async function loadApplication() {
@@ -491,7 +493,8 @@ if (error) {
 }
 
 const template = data.template || "Attendance";
-console.log("Template:", template);
+window.currentShareToken = data.share_token;
+window.currentAppData = data;
 
 switch (template) {
 
