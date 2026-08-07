@@ -422,6 +422,17 @@ if (error) {
 
 const template = data.template || "Attendance";
 console.log("Template:", template);
+
+switch (template) {
+
+    case "attendance":
+        break;
+
+    case "pricelist":
+        alert("PRICE LIST");
+        return;
+
+}
 if (isReadOnly) {
 
     document.body.insertAdjacentHTML(
