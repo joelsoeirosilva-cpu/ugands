@@ -438,11 +438,22 @@ document.getElementById("attendanceList").innerHTML =
 
 }
 
-window.updatePrice = function(index, value){
+window.updatePrice = async function(index, value){
 
 window.priceItems[index].price = value;
 
-console.log("UPDATED:",window.priceItems);
+await db
+.from("apps")
+.update({
+data:{
+...window.currentAppData.data,
+items: window.priceItems
+}
+})
+.eq(
+"share_token",
+window.currentShareToken
+);
 
 };
 
@@ -523,6 +534,7 @@ const appTitle = data.data.title || "Attendance Tracker";
 window.appTitle = appTitle;
 window.appData = data.data;
 window.currentShareToken = data.share_token;
+window.currentAppData = data;
 const showTotal = data.data.showTotal;
 const showPresent = data.data.showPresent;
 console.log(window.currentShareToken);
