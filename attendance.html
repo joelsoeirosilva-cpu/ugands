@@ -435,6 +435,7 @@ function generatePriceListPdf(){
     const doc = new jsPDF();
 
     const items = window.priceItems || [];
+	console.log(items);
 
     doc.setFontSize(20);
     doc.text(window.appTitle || "Price List", 20, 20);
