@@ -497,9 +497,7 @@ switch (template) {
         break;
 
 }
-if (template === "pricelist"){
-return;
-}
+
 if (isReadOnly) {
 
     document.body.insertAdjacentHTML(
@@ -520,6 +518,9 @@ if (isReadOnly) {
 }
 const logoImg = new Image();
 logoImg.src = "logo.png";
+if (template === "pricelist"){
+return;
+}
 window.participants = data.data.participants || [];
 const participants = window.participants;
 
