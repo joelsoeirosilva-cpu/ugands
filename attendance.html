@@ -387,6 +387,30 @@ let pdfMode = null;
 
 <script>
 
+function renderPriceList(data) {
+
+    document.getElementById(
+        "pageTitle"
+    ).innerText =
+        data.data.title || "Price List";
+
+    document.getElementById(
+        "attendanceList"
+    ).innerHTML = `
+        <div style="
+            padding:20px;
+            text-align:center;
+            font-weight:bold;
+            border:1px solid #e5e7eb;
+            border-radius:12px;
+        ">
+            Price List Template
+        </div>
+    `;
+
+}
+`
+
 async function loadApplication() {
 
 const params = new URLSearchParams(window.location.search);
@@ -428,9 +452,12 @@ switch (template) {
     case "attendance":
         break;
 
-    case "pricelist":
-        alert("PRICE LIST");
-        return;
+case "pricelist":
+
+    document.getElementById("pageTitle").innerText =
+        "Price List";
+
+    return;
 
 }
 if (isReadOnly) {
