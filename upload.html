@@ -636,6 +636,7 @@ document.getElementById("logoutBtn");
 
 let participants = [];
 let items = [];
+let uploadedRows = [];
 let selectedTemplate = "attendance";
 let continueGeneration = false;
 
@@ -757,6 +758,7 @@ reader.onload = function(e){
 
     }
 
+	uploadedRows = rows;
     participants = [];
 	items = [];
 
@@ -882,10 +884,20 @@ if (
 
     return;
 }
-
+participants = [];
+items = [];
 let appData;
 
 if(selectedTemplate === "pricelist"){
+
+for(let i = 1; i < uploadedRows.length; i++){
+
+    items.push({
+        product: uploadedRows[i][0],
+        price: ""
+    });
+
+}
 
     appData = {
 
@@ -897,6 +909,23 @@ if(selectedTemplate === "pricelist"){
     };
 
 } else {
+
+    for(let i = 1; i < uploadedRows.length; i++){
+
+        const cols = uploadedRows[i];
+
+        const presente =
+            (cols[1] || "no")
+            .toString()
+            .trim()
+            .toLowerCase();
+
+        participants.push({
+            name: cols[0],
+            present: presente === "yes"
+        });
+
+    }
 
     appData = {
 
