@@ -394,44 +394,31 @@ window.priceItems = items;
     document.getElementById("pageTitle").innerText =
         data.data.title || "Price List";
 let html="";
-html = `
-<table style="
-    width:100%;
-    border-collapse:collapse;
-">
-    <tr>
-        <th>Product</th>
-        <th>Price</th>
-    </tr>
-`;
+
 items.forEach((item, index) => {
 
-html += `
-<tr>
+    html += `
+    <div class="person">
 
-    <td style="
-        padding:12px;
-        border-bottom:1px solid #e5e7eb;
-    ">
-        ${item.product}
-    </td>
+        <strong>${item.product}</strong>
 
-    <td style="
-        padding:12px;
-        border-bottom:1px solid #e5e7eb;
-    ">
         <input
             type="number"
             value="${item.price}"
             placeholder="0.00"
-			onchange="updatePrice(${index}, this.value)"
+            onchange="updatePrice(${index}, this.value)"
+            style="
+                width:120px;
+                padding:8px;
+                border:1px solid #ddd;
+                border-radius:8px;
+            "
         >
-    </td>
-</tr>
-`;
-});
 
-html += `</table>`;
+    </div>
+    `;
+
+});
 
 document.getElementById("attendanceList").innerHTML =
     html;
