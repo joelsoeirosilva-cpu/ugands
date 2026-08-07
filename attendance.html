@@ -395,11 +395,55 @@ let html="";
 
 items.forEach(item => {
 
+html = `
+<table style="
+    width:100%;
+    border-collapse:collapse;
+">
+    <tr>
+        <th style="
+            text-align:left;
+            padding:12px;
+            border-bottom:2px solid #e5e7eb;
+        ">
+            Product
+        </th>
+
+        <th style="
+            text-align:left;
+            padding:12px;
+            border-bottom:2px solid #e5e7eb;
+        ">
+            Price
+        </th>
+    </tr>
+`;
+
+items.forEach(item => {
+
     html += `
-        <div>
-            ${item.product}
-        </div>
+        <tr>
+
+            <td style="
+                padding:12px;
+                border-bottom:1px solid #e5e7eb;
+            ">
+                ${item.product}
+            </td>
+
+            <td style="
+                padding:12px;
+                border-bottom:1px solid #e5e7eb;
+            ">
+                ${item.price}
+            </td>
+
+        </tr>
     `;
+
+});
+
+html += `</table>`;
 
 });	
 document.getElementById("attendanceList").innerHTML =
