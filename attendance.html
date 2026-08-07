@@ -429,7 +429,38 @@ generatePriceListPdf();
 }
 
 function generatePriceListPdf(){
-alert("GERAR PDF PRICE LIST");
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF();
+
+    const items = window.priceItems || [];
+
+    doc.setFontSize(20);
+    doc.text(window.appTitle || "Price List", 20, 20);
+
+    let y = 40;
+
+    items.forEach(item => {
+
+        doc.text(
+            item.product,
+            20,
+            y
+        );
+
+        doc.text(
+            String(item.price || ""),
+            150,
+            y
+        );
+
+        y += 10;
+
+    });
+
+    doc.save("price-list.pdf");
+
 }
 	
 }
