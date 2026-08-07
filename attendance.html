@@ -395,50 +395,32 @@ let html="";
 
 items.forEach(item => {
 
-html = `
-<table style="
-    width:100%;
-    border-collapse:collapse;
-">
-    <tr>
-        <th style="
-            text-align:left;
-            padding:12px;
-            border-bottom:2px solid #e5e7eb;
-        ">
-            Product
-        </th>
-
-        <th style="
-            text-align:left;
-            padding:12px;
-            border-bottom:2px solid #e5e7eb;
-        ">
-            Price
-        </th>
-    </tr>
-`;
-
-items.forEach(item => {
-
     html += `
         <tr>
-			<td style="
-    padding:12px;
-    border-bottom:1px solid #e5e7eb;
-">
-    <input
-        type="number"
-        value="${item.price}"
-        placeholder="0.00"
-        style="
-            width:120px;
-            padding:8px;
-            border:1px solid #ddd;
-            border-radius:8px;
-        "
-    >
-</td>
+
+            <td style="
+                padding:12px;
+                border-bottom:1px solid #e5e7eb;
+            ">
+                ${item.product}
+            </td>
+
+            <td style="
+                padding:12px;
+                border-bottom:1px solid #e5e7eb;
+            ">
+                <input
+                    type="number"
+                    value="${item.price}"
+                    placeholder="0.00"
+                    style="
+                        width:120px;
+                        padding:8px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                    "
+                >
+            </td>
 
         </tr>
     `;
@@ -447,7 +429,6 @@ items.forEach(item => {
 
 html += `</table>`;
 
-});	
 document.getElementById("attendanceList").innerHTML =
     html;
 	
