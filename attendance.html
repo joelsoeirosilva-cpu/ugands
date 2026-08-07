@@ -419,6 +419,9 @@ if (error) {
     alert("Application not found");
     return;
 }
+
+const template = data.template || "Attendance";
+console.log("Template:", template);
 if (isReadOnly) {
 
     document.body.insertAdjacentHTML(
