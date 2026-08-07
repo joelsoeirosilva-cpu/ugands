@@ -839,9 +839,17 @@ setTimeout(() => {
 
     doc.setFont(undefined, "bold");
 
+if(template === "pricelist"){
+
+    doc.text("Product", 25, y);
+    doc.text("Price", 150, y);
+
+} else {
+
     doc.text("List", 25, y);
     doc.text("Status", 150, y);
 
+}
     doc.setFont(undefined, "normal");
 
 }
@@ -849,6 +857,11 @@ setTimeout(() => {
     const doc = new jsPDF();
 
     const participants = window.participants || [];
+	const template =
+    window.currentAppData.template;
+
+const items =
+    window.priceItems || [];
     const title = window.appTitle || "List Tracker";
 	const showTotal = window.appData.showTotal;
 	const showPresent = window.appData.showPresent;
@@ -907,6 +920,12 @@ let y =
 drawTableHeader(y);
 
 y += 12;
+
+if(template === "pricelist"){
+
+    console.log("PRICE LIST PDF");
+
+}
 
 participants.forEach(person => {
 
