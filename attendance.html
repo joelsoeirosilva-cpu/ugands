@@ -440,15 +440,9 @@ document.getElementById("attendanceList").innerHTML =
 
 window.updatePrice = function(index, value){
 
-    console.log(
-        "Product:",
-        window.priceItems[index].product
-    );
+window.priceItems[index].price = value;
 
-    console.log(
-        "Price:",
-        value
-    );
+console.log("UPDATED:",window.priceItems);
 
 };
 
