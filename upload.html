@@ -1101,11 +1101,27 @@ document
             "previewTitle"
         ).innerText =
             `Data Preview • ${uploadedRows.length} Records`;
+let html = "";
 
-        document.getElementById(
-            "previewContent"
-        ).innerHTML =
-            window.previewHtml || "";
+for(let i = 1; i < uploadedRows.length; i++){
+
+    html += `
+        <div style="
+            background:white;
+            padding:15px;
+            margin-bottom:10px;
+            border-radius:10px;
+            border:1px solid #ddd;
+        ">
+            ${uploadedRows[i][0]}
+        </div>
+    `;
+
+}
+
+document.getElementById(
+    "previewContent"
+).innerHTML = html;
 
     }
 
