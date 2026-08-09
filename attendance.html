@@ -602,6 +602,14 @@ document.getElementById(
 ).value =
   data.data.attendanceDate ||
   new Date().toISOString().split("T")[0];
+  
+if(!showDate){
+
+    document.getElementById(
+        "attendanceDate"
+    ).parentElement.style.display = "none";
+
+}
 
 if (isReadOnly) {
 
@@ -883,6 +891,10 @@ const showPresent =
     template === "attendance"
         ? window.appData.showPresent
         : false;
+		
+const showDate =
+    window.appData.showDate;
+		
 
 const date =
     template === "attendance"
