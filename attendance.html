@@ -541,6 +541,7 @@ document.getElementById("attendanceList");
 
 let html = "";
 
+if (template === "attendance"){
 participants.forEach((person, index) => {
 
     html += `
@@ -563,7 +564,7 @@ console.log("ATTENDANCE HTML");
 attendanceList.innerHTML = html;
 
 updateStats();
-
+}
 document.getElementById(
     "pageTitle"
 ).innerText = appTitle;
