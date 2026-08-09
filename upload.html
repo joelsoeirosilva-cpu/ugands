@@ -897,6 +897,11 @@ document
 .getElementById("generateBtn")
 .addEventListener("click", async function(){
 
+const ignoreHeader =
+    document.getElementById(
+        "ignoreHeader"
+    ).checked;
+
 const manualText =
 document.getElementById("participantsText")
 .value
@@ -933,7 +938,10 @@ let appData;
 
 if(selectedTemplate === "pricelist"){
 
-for(let i = 1; i < uploadedRows.length; i++){
+const startRow =
+    ignoreHeader ? 1 : 0;
+
+for(let i = startRow; i < uploadedRows.length; i++){
 
     items.push({
         product: uploadedRows[i][0],
@@ -961,9 +969,12 @@ appData = {
 
 } else {
 
-    for(let i = 1; i < uploadedRows.length; i++){
+const startRow =
+    ignoreHeader ? 1 : 0;
 
-        const cols = uploadedRows[i];
+for(let i = startRow; i < uploadedRows.length; i++){
+
+    const cols = uploadedRows[i];
 
         const presente =
             (cols[1] || "no")
