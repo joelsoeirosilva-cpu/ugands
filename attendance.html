@@ -422,58 +422,6 @@ items.forEach((item, index) => {
 
 document.getElementById("attendanceList").innerHTML =
     html;
-
-document.getElementById("pdfBtn")
-.onclick = function(){
-generatePriceListPdf();
-}
-
-function generatePriceListPdf(){
-
-    const { jsPDF } = window.jspdf;
-
-    const doc = new jsPDF();
-
-    const items = window.priceItems || [];
-	console.log(items); 
-	
-	items.forEach(item => {
-		console.log(item.product, item.price);
-		});
-	
-
-    doc.setFontSize(20);
-    doc.text(window.appTitle || "Price List", 20, 20);
-
-    let y = 40;
-
-    items.forEach(item => {
-	
-	console.log(
-    "DRAW:",
-    item.product,
-    item.price
-);
-
-        doc.text(
-            item.product,
-            20,
-            y
-        );
-
-        doc.text(
-            String(item.price || ""),
-            150,
-            y
-        );
-
-        y += 10;
-
-    });
-
-    doc.save("price-list.pdf");
-
-}
 	
 }
 
@@ -493,9 +441,6 @@ items: window.priceItems
 "share_token",
 window.currentShareToken
 );
-
-console.log("SAVED");
-
 };
 
 async function loadApplication() {
@@ -509,9 +454,6 @@ const shareMode =
 
 const isReadOnly =
     shareMode === "readonly";
-
-console.log("App ID:", appId);
-console.log("Share Token:", shareToken);
 
 let query = db
     .from("apps")
@@ -532,6 +474,7 @@ if (error) {
 }
 
 const template = data.template || "Attendance";
+window.currentTemplate = template;
 window.currentShareToken = data.share_token;
 window.currentAppData = data;
 
@@ -568,15 +511,21 @@ if (isReadOnly) {
 }
 const logoImg = new Image();
 logoImg.src = "logo.png";
-if (template === "pricelist"){
-return;
-}
-window.participants = data.data.participants || [];
-const participants = window.participants;
 
-participants.sort((a, b) =>
-   a.name.localeCompare(b.name)
-   );
+let participants = [];
+
+if(template === "attendance"){
+
+    participants =
+        data.data.participants || [];
+
+    participants.sort((a, b) =>
+        a.name.localeCompare(b.name)
+    );
+
+    window.participants = participants;
+
+}
 
 const appTitle = data.data.title || "Attendance Tracker";
 window.appTitle = appTitle;
@@ -585,8 +534,6 @@ window.currentShareToken = data.share_token;
 window.currentAppData = data;
 const showTotal = data.data.showTotal;
 const showPresent = data.data.showPresent;
-console.log(window.currentShareToken);
-
 
 const attendanceList =
 document.getElementById("attendanceList");
@@ -660,13 +607,17 @@ document
 
 let presentCount = 0;
 
-participants.forEach(p => {
+if(template === "attendance"){
 
-    if(p.present){
-        presentCount++;
-    }
+    participants.forEach(p => {
 
-});
+        if(p.present){
+            presentCount++;
+        }
+
+    });
+
+}
 
 let statsText = "";
 
@@ -802,13 +753,6 @@ document
 .getElementById("pdfBtn")
 .addEventListener("click", async function(){
 
-alert("ENTREI NO PDF");
-
-console.log(
-    "PDF TEMPLATE:",
-    window.currentAppData.template
-);
-
 const { data } =
     await db.auth.getSession();
 
@@ -851,17 +795,17 @@ setTimeout(() => {
 
     doc.setFont(undefined, "bold");
 
-if(template === "pricelist"){
+doc.text(
+    pdfData.header1,
+    25,
+    y
+);
 
-    doc.text("Product", 25, y);
-    doc.text("Price", 150, y);
-
-} else {
-
-    doc.text("List", 25, y);
-    doc.text("Status", 150, y);
-
-}
+doc.text(
+    pdfData.header2,
+    150,
+    y
+);
     doc.setFont(undefined, "normal");
 
 }
@@ -874,12 +818,53 @@ if(template === "pricelist"){
 
 const items =
     window.priceItems || [];
-    const title = window.appTitle || "List Tracker";
-	const showTotal = window.appData.showTotal;
-	const showPresent = window.appData.showPresent;
+	let pdfData;
+	
+	if(template === "attendance"){
 
-    const date =
-        document.getElementById("attendanceDate").value;
+    pdfData = {
+
+        header1: "List",
+        header2: "Status",
+
+        rows: participants.map(person => ({
+            col1: person.name,
+            col2: person.present ? "YES" : "NO"
+        }))
+
+    };
+
+}
+else if(template === "pricelist"){
+
+    pdfData = {
+
+        header1: "Product",
+        header2: "Price",
+
+        rows: items.map(item => ({
+            col1: item.product,
+            col2: item.price || ""
+        }))
+
+    };
+
+}
+    const title = window.appTitle || "List Tracker";
+const showTotal =
+    template === "attendance"
+        ? window.appData.showTotal
+        : false;
+
+const showPresent =
+    template === "attendance"
+        ? window.appData.showPresent
+        : false;
+
+const date =
+    template === "attendance"
+        ? document.getElementById("attendanceDate").value
+        : "";
 
     const presentCount =
         participants.filter(p => p.present).length;
@@ -915,12 +900,19 @@ doc.setTextColor(0, 0, 0);
 doc.setFont(undefined, "normal");
 doc.setFontSize(12);
 doc.setFont(undefined, "bold");
-doc.text("Date:", 145, startY);
+if(date){
 
-doc.setFont(undefined, "normal");
-doc.setTextColor(37, 99, 235);
+    doc.setFont(undefined, "bold");
+    doc.text("Date:", 145, startY);
 
-doc.text(date, 160, startY);
+    doc.setFont(undefined, "normal");
+    doc.setTextColor(37, 99, 235);
+
+    doc.text(date, 160, startY);
+
+    doc.setTextColor(0, 0, 0);
+
+}
 
 doc.setTextColor(0, 0, 0);
 
@@ -933,66 +925,38 @@ drawTableHeader(y);
 
 y += 12;
 
-if(template === "pricelist"){
 
-    console.log("PRICE LIST PDF");
+pdfData.rows.forEach(row => {
 
-}
+    if (y > 270) {
 
-participants.forEach(person => {
+        doc.addPage();
+        y = 20;
 
-const checkImg = new Image();
-checkImg.src = "check.png";
+        drawTableHeader(y);
 
-const crossImg = new Image();
-crossImg.src = "cross.png";
+        y += 12;
 
-if (y > 270) {
+    }
 
-    doc.addPage();
-    y = 20;
-	drawTableHeader(y);
-	y +=12;
+    doc.setDrawColor(0, 0, 0);
 
-}
-doc.setDrawColor(0, 0, 0);
-doc.rect(20, y - 6, 120, 10);
-doc.rect(140, y - 6, 40, 10);
+    doc.rect(20, y - 6, 120, 10);
+    doc.rect(140, y - 6, 40, 10);
 
-doc.text(person.name, 25, y);
+    doc.text(
+        String(row.col1),
+        25,
+        y
+    );
 
+    doc.text(
+        String(row.col2),
+        150,
+        y
+    );
 
-if(person.present){
-
-doc.addImage(
-    checkImg,
-    "PNG",
-    153,
-    y - 5,
-    8,
-    8
-);
-
-
-doc.setDrawColor(0, 0, 0);
-
-} else {
-
-doc.addImage(
-    crossImg,
-    "PNG",
-    153,
-    y - 5,
-    8,
-    8
-);
-
-doc.setDrawColor(0, 0, 0);
-}
-
-doc.setTextColor(0, 0, 0);
-
-    y += 10;	
+    y += 10;
 
 });
 
@@ -1071,9 +1035,6 @@ document.getElementById(
 
 loadApplication();
 
-console.log("PDF BUTTON:",
-document.getElementById("pdfBtn"));
-
 editableShareBtn.addEventListener(
     "click",
     async () => {
@@ -1138,8 +1099,6 @@ document
     const { data } =
         await db.auth.getSession();
 
-		console.log("SESSION:", data.session);
-
     if (!data.session) {
         alert("Login required");
         return;
@@ -1154,11 +1113,7 @@ document
         .eq("id", userId)
         .single();
 
-		console.log("PROFILE:", profile);
-
     let mode = "readonly";
-
-	console.log("PLAN:", profile?.plan);
 
 if (profile?.plan === "pro") {
 
@@ -1194,7 +1149,7 @@ if (profile?.plan === "pro") {
         justify-content:center;
         align-items:center;
         font-size:28px;
-        font-weight:bold;
+        font-weight:bold;\
         color:#2563eb;
     "
 >
