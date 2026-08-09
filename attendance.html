@@ -405,28 +405,30 @@ items.forEach((item, index) => {
 
         <strong>${item.product}</strong>
 
-<div
-    style="
-        display:flex;
-        align-items:center;
-        gap:8px;
-    "
->
+        <div
+            style="
+                display:flex;
+                align-items:center;
+                gap:8px;
+            "
+        >
 
-    <input
-        type="number"
-        value="${item.price}"
-        placeholder="0.00"
-        onchange="updatePrice(${index}, this.value)"
-        style="
-            width:120px;
-            padding:8px;
-            border:1px solid #ddd;
-            border-radius:8px;
-        "
-    >
+            <input
+                type="number"
+                value="${item.price}"
+                placeholder="0.00"
+                onchange="updatePrice(${index}, this.value)"
+                style="
+                    width:120px;
+                    padding:8px;
+                    border:1px solid #ddd;
+                    border-radius:8px;
+                "
+            >
 
-    <
+            <strong>${currency}</strong>
+
+        </div>
 
     </div>
     `;
