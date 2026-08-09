@@ -628,6 +628,24 @@ z-index:9999;
 
         </div>
 
+		<div
+    style="
+        padding:15px 20px;
+        border-bottom:1px solid #e5e7eb;
+    "
+>
+
+    <label>
+        <input
+            type="checkbox"
+            id="ignoreHeader"
+            checked
+        >
+        Ignore first row (header)
+    </label>
+
+</div>
+
         <div
             id="previewContent"
             style="
@@ -1101,6 +1119,12 @@ document
 .getElementById("previewBtn")
 .addEventListener("click", () => {
 
+	const ignoreHeader =
+    document.getElementById(
+        "ignoreHeader"
+    ).checked;
+
+
     const mode =
         document.querySelector(
             'input[name="inputMode"]:checked'
@@ -1174,7 +1198,10 @@ document
             `Data Preview • ${uploadedRows.length} Records`;
 let html = "";
 
-for(let i = 1; i < uploadedRows.length; i++){
+const startRow =
+    ignoreHeader ? 1 : 0;
+
+for(let i = startRow; i < uploadedRows.length; i++){
 
     html += `
         <div style="
