@@ -388,6 +388,7 @@ let pdfMode = null;
 <script>
 
 function renderPriceList(data) {
+console.log("RENDER PRICE LIST");
 const items = data.data.items || [];
 window.priceItems = items;
 
@@ -558,7 +559,7 @@ participants.forEach((person, index) => {
     `;
 
 });
-
+console.log("ATTENDANCE HTML");
 attendanceList.innerHTML = html;
 
 updateStats();
