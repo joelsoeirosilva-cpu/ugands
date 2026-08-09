@@ -411,7 +411,17 @@ margin-bottom:20px;
         >
 
     </div>
+<div id="generalOptions">
 
+    <div style="margin-top:20px;">
+        <label>
+            <input type="checkbox" id="showDate" checked>
+            Enable Date
+        </label>
+    </div>
+
+</div>
+<div id="attendanceOptions">
     <div style="margin-top:20px;">
         <label>
             <input type="checkbox" id="showTotal" checked>
@@ -423,6 +433,43 @@ margin-bottom:20px;
         <label>
             <input type="checkbox" id="showPresent" checked>
             Show Present Count
+        </label>
+    </div>
+</div>
+</div>
+<div id="priceListOptions" style="display:none;">
+
+    <div style="margin-top:20px;">
+        <label>
+            <input
+                type="radio"
+                name="currency"
+                value="€"
+                checked
+            >
+            Euro (€)
+        </label>
+    </div>
+
+    <div style="margin-top:10px;">
+        <label>
+            <input
+                type="radio"
+                name="currency"
+                value="£"
+            >
+            Pound (£)
+        </label>
+    </div>
+
+    <div style="margin-top:10px;">
+        <label>
+            <input
+                type="radio"
+                name="currency"
+                value="$"
+            >
+            Dollar ($)
         </label>
     </div>
 
@@ -976,6 +1023,19 @@ templates.forEach(template => {
 
         selectedTemplate =
         this.dataset.template;
+		document.getElementById(
+    "attendanceOptions"
+).style.display =
+    selectedTemplate === "attendance"
+        ? "block"
+        : "none";
+
+document.getElementById(
+    "priceListOptions"
+).style.display =
+    selectedTemplate === "pricelist"
+        ? "block"
+        : "none";
 
         console.log(
             "Selected template:",
