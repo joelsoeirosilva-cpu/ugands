@@ -388,9 +388,11 @@ let pdfMode = null;
 <script>
 
 function renderPriceList(data) {
-console.log("RENDER PRICE LIST");
+
 const items = data.data.items || [];
 window.priceItems = items;
+const currency =
+    data.data.currency || "€";
 
     document.getElementById("pageTitle").innerText =
         data.data.title || "Price List";
@@ -403,18 +405,28 @@ items.forEach((item, index) => {
 
         <strong>${item.product}</strong>
 
-        <input
-            type="number"
-            value="${item.price}"
-            placeholder="0.00"
-            onchange="updatePrice(${index}, this.value)"
-            style="
-                width:120px;
-                padding:8px;
-                border:1px solid #ddd;
-                border-radius:8px;
-            "
-        >
+<div
+    style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+    "
+>
+
+    <input
+        type="number"
+        value="${item.price}"
+        placeholder="0.00"
+        onchange="updatePrice(${index}, this.value)"
+        style="
+            width:120px;
+            padding:8px;
+            border:1px solid #ddd;
+            border-radius:8px;
+        "
+    >
+
+    <
 
     </div>
     `;
