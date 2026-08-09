@@ -101,12 +101,15 @@ h1{
 		
     </div>
 <h1 id="pageTitle" style="text-align:center;"></h1>
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:20px;
-">
+<div
+    id="dateSection"
+    style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    "
+>
 
     <div style="
     display:flex;
@@ -553,6 +556,7 @@ window.currentShareToken = data.share_token;
 window.currentAppData = data;
 const showTotal = data.data.showTotal;
 const showPresent = data.data.showPresent;
+const showDate = data.data.showDate;
 
 const attendanceList =
 document.getElementById("attendanceList");
@@ -606,10 +610,11 @@ document.getElementById(
 if(!showDate){
 
     document.getElementById(
-        "attendanceDate"
-    ).parentElement.style.display = "none";
+        "dateSection"
+    ).style.display = "none";
 
 }
+
 
 if (isReadOnly) {
 
