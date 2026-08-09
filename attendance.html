@@ -838,6 +838,8 @@ doc.text(
 
 const items =
     window.priceItems || [];
+	const currency =
+    window.appData.currency || "€";
 	let pdfData;
 	
 	if(template === "attendance"){
@@ -855,6 +857,7 @@ const items =
     };
 
 }
+
 else if(template === "pricelist"){
 
     pdfData = {
@@ -862,10 +865,10 @@ else if(template === "pricelist"){
         header1: "Product",
         header2: "Price",
 
-        rows: items.map(item => ({
-            col1: item.product,
-            col2: item.price || ""
-        }))
+rows: items.map(item => ({
+    col1: item.product,
+    col2: `${item.price || ""} ${currency}`
+}))
 
     };
 
