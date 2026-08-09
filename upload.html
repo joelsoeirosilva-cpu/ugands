@@ -924,14 +924,19 @@ for(let i = 1; i < uploadedRows.length; i++){
 
 }
 
-    appData = {
+appData = {
 
-        title:
-            document.getElementById("appTitle").value,
+    title:
+        document.getElementById("appTitle").value,
 
-        items: items
+    items: items,
 
-    };
+    currency:
+        document.querySelector(
+            'input[name="currency"]:checked'
+        ).value
+
+};
 
 } else {
 
