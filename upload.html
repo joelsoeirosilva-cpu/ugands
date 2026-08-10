@@ -937,16 +937,56 @@ let appData;
 
 if(selectedTemplate === "pricelist"){
 
-const startRow =
-    ignoreHeader ? 1 : 0;
+    const mode =
+        document.querySelector(
+            'input[name="inputMode"]:checked'
+        ).value;
 
-for(let i = startRow; i < uploadedRows.length; i++){
+    if(mode === "manual"){
 
-    items.push({
-        product: uploadedRows[i][0],
-        price: ""
-    });
+        items = document
+            .getElementById("participantsText")
+            .value
+            .split(/[\n,]+/)
+            .map(p => p.trim())
+            .filter(p => p)
+            .map(p => ({
+                product: p,
+                price: ""
+            }));
 
+    } else {
+
+        const startRow =
+            ignoreHeader ? 1 : 0;
+
+        for(let i = startRow; i < uploadedRows.length; i++){
+
+            items.push({
+                product: uploadedRows[i][0],
+                price: ""
+            });
+
+        }
+
+    }
+
+    appData = {
+
+        title:
+            document.getElementById("appTitle").value,
+
+        items: items,
+
+        currency:
+            document.querySelector(
+                'input[name="currency"]:checked'
+            ).value,
+
+        showDate:
+            document.getElementById("showDate").checked
+
+    };
 }
 
 appData = {
