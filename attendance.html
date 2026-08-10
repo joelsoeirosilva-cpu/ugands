@@ -485,6 +485,45 @@ document.getElementById("attendanceList").innerHTML =
     html;
 
 }
+function renderInspection(data) {
+
+const items = data.data.items || [];
+
+document.getElementById("pageTitle").innerText =
+    data.data.title || "Date List";
+
+let html = "";
+
+items.forEach((item, index) => {
+
+    html += `
+    <div class="person">
+
+        <strong>${item.item}</strong>
+
+        <input
+            type="date"
+            value="${item.date || ""}"
+            onchange="updateInspectionDate(${index}, this.value)"
+            style="
+                width:160px;
+                padding:8px;
+                border:1px solid #ddd;
+                border-radius:8px;
+            "
+        >
+
+    </div>
+    `;
+
+});
+
+document.getElementById("attendanceList").innerHTML =
+    html;
+
+window.inspectionItems = items;
+
+}
 window.updatePrice = async function(index, value){
 
 window.priceItems[index].price = value;
@@ -513,6 +552,25 @@ await db
 data:{
 ...window.currentAppData.data,
 items: window.inventoryItems
+}
+})
+.eq(
+"share_token",
+window.currentShareToken
+);
+
+};
+
+window.updateInspectionDate = async function(index, value){
+
+window.inspectionItems[index].date = value;
+
+await db
+.from("apps")
+.update({
+data:{
+...window.currentAppData.data,
+items: window.inspectionItems
 }
 })
 .eq(
@@ -573,6 +631,12 @@ switch (template) {
         window.appData = data.data;
         renderInventory(data);
         break;
+		
+	case "inspection":
+		window.appTitle = data.data.title;
+		window.appData = data.data;
+		renderInspection(data);
+		break;
 
 }
 
