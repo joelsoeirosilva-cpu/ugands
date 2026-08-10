@@ -24,6 +24,10 @@ body{
     margin:auto;
 }
 
+.logo-image{
+    height:180px;
+}
+
 .card{
     background:white;
     padding:30px;
@@ -63,6 +67,14 @@ h1{
     background:#16a34a;
 }
 
+@media(max-width:768px){
+
+    .logo-image{
+        height:90px;
+    }
+
+}
+
 </style>
 </head>
 <body>
@@ -73,11 +85,11 @@ h1{
         margin-bottom:20px;
     "
 >
-    <img
-        src="logo.png"
-        alt="UGANDS"
-        style="height:180px;"
-    >
+<img
+    class="logo-image"
+    src="logo.png"
+    alt="UGANDS"
+>
 </div>
 
 <div class="container">
