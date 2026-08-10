@@ -740,26 +740,28 @@ async function loadUser() {
         .eq("id", currentUser.id)
         .single();
 
-	currentProfile = profile;
+currentProfile = profile;
 
-	if (!currentProfile) {
-	
-		const newProfile = {
-			id: currentUser.id,
-			email: currentUser.email,
-			plan: "free",
-			account_type: "personal"
-			};
-	
-	}
-	
-	const { error: insertError } = await db
-	.from ("profiles")
-	.insert([newProfile]);
-	
-	if (!insertError){
-	currentProfile = newProfile;
-	}
+if (!currentProfile) {
+
+    const newProfile = {
+        id: currentUser.id,
+        email: currentUser.email,
+        plan: "free",
+        account_type: "personal"
+    };
+
+    const { error: insertError } = await db
+        .from("profiles")
+        .insert([newProfile]);
+
+    if (!insertError) {
+
+        currentProfile = newProfile;
+
+    }
+
+}
 
     console.log("USER:", currentUser);
     console.log("PROFILE:", currentProfile);
