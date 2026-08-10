@@ -932,16 +932,8 @@ if (
 
     return;
 }
-const mode =
-    document.querySelector(
-        'input[name="inputMode"]:checked'
-    ).value;
-
-if(mode === "file"){
-    participants = [];
-    items = [];
-}
-
+participants = [];
+items = [];
 let appData;
 
 if(selectedTemplate === "pricelist"){
@@ -977,14 +969,12 @@ appData = {
 
 } else {
 
-if(mode === "file"){
+const startRow =
+    ignoreHeader ? 1 : 0;
 
-    const startRow =
-        ignoreHeader ? 1 : 0;
+for(let i = startRow; i < uploadedRows.length; i++){
 
-    for(let i = startRow; i < uploadedRows.length; i++){
-
-        const cols = uploadedRows[i];
+    const cols = uploadedRows[i];
 
         const presente =
             (cols[1] || "no")
@@ -998,29 +988,6 @@ if(mode === "file"){
         });
 
     }
-
-}
-
-    appData = {
-
-        title:
-            document.getElementById("appTitle").value,
-
-        participants:
-            participants,
-
-        showTotal:
-            document.getElementById("showTotal").checked,
-
-        showPresent:
-            document.getElementById("showPresent").checked,
-
-        showDate:
-            document.getElementById("showDate").checked
-
-    };
-
-}
 
     appData = {
 
