@@ -526,7 +526,15 @@ window.inspectionItems = items;
 }
 window.updatePrice = async function(index, value){
 
+if (
+    new URLSearchParams(window.location.search)
+    .get("mode") === "readonly"
+){
+    return;
+}
+
 window.priceItems[index].price = value;
+
 
 await db
 .from("apps")
@@ -543,6 +551,13 @@ window.currentShareToken
 };
 
 window.updateQuantity = async function(index, value){
+
+if (
+    new URLSearchParams(window.location.search)
+    .get("mode") === "readonly"
+){
+    return;
+}
 
 window.inventoryItems[index].quantity = value;
 
@@ -562,6 +577,13 @@ window.currentShareToken
 };
 
 window.updateInspectionDate = async function(index, value){
+
+if (
+    new URLSearchParams(window.location.search)
+    .get("mode") === "readonly"
+){
+    return;
+}
 
 window.inspectionItems[index].date = value;
 
