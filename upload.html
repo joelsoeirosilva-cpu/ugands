@@ -1330,6 +1330,20 @@ document
             document.querySelector(
                 'input[name="inputMode"]:checked'
             ).value;
+			
+		const ignoreHeader =
+    document.getElementById("ignoreHeader");
+
+if(mode === "manual"){
+
+    ignoreHeader.checked = false;
+    ignoreHeader.disabled = true;
+
+} else {
+
+    ignoreHeader.disabled = false;
+
+}
 
         document.getElementById(
             "fileSection"
