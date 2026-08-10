@@ -446,7 +446,45 @@ document.getElementById("attendanceList").innerHTML =
 );
 	
 }
+function renderInventory(data) {
 
+const items = data.data.items || [];
+
+window.inventoryItems = items;
+
+document.getElementById("pageTitle").innerText =
+    data.data.title || "Quantity List";
+
+let html = "";
+
+items.forEach((item, index) => {
+
+    html += `
+    <div class="person">
+
+        <strong>${item.item}</strong>
+
+        <input
+            type="number"
+            value="${item.quantity}"
+            onchange="updateQuantity(${index}, this.value)"
+            style="
+                width:120px;
+                padding:8px;
+                border:1px solid #ddd;
+                border-radius:8px;
+            "
+        >
+
+    </div>
+    `;
+
+});
+
+document.getElementById("attendanceList").innerHTML =
+    html;
+
+}
 window.updatePrice = async function(index, value){
 
 window.priceItems[index].price = value;
@@ -463,6 +501,25 @@ items: window.priceItems
 "share_token",
 window.currentShareToken
 );
+};
+
+window.updateQuantity = async function(index, value){
+
+window.inventoryItems[index].quantity = value;
+
+await db
+.from("apps")
+.update({
+data:{
+...window.currentAppData.data,
+items: window.inventoryItems
+}
+})
+.eq(
+"share_token",
+window.currentShareToken
+);
+
 };
 
 async function loadApplication() {
@@ -506,9 +563,15 @@ switch (template) {
         break;
 
     case "pricelist":
-		window.appTitle = data.data.title;
-		window.appData = data.data;
+        window.appTitle = data.data.title;
+        window.appData = data.data;
         renderPriceList(data);
+        break;
+
+    case "inventory":
+        window.appTitle = data.data.title;
+        window.appData = data.data;
+        renderInventory(data);
         break;
 
 }
