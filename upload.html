@@ -903,20 +903,28 @@ document.getElementById("participantsText")
 .value
 .trim();
 
-if(manualText && !continueGeneration){
+const mode =
+    document.querySelector(
+        'input[name="inputMode"]:checked'
+    ).value;
 
-    participants = manualText
+let rows = [];
+
+if(mode === "manual"){
+
+    rows = manualText
         .split(/[\n,]+/)
-        .map(name => ({
-            name: name.trim(),
-            present: false
-        }))
-        .filter(p => p.name);
+        .map(name => [name.trim()])
+        .filter(row => row[0]);
+
+} else {
+
+    rows = uploadedRows;
 
 }
 
 const totalRecords =
-    uploadedRows.length -
+    rows.length -
     (ignoreHeader ? 1 : 0);
 
 if (
@@ -940,13 +948,15 @@ let appData;
 if(selectedTemplate === "pricelist"){
 
 const startRow =
-    ignoreHeader ? 1 : 0;
+    mode === "file" && ignoreHeader
+        ? 1
+        : 0;
 
-for(let i = startRow; i < uploadedRows.length; i++){
+for(let i = startRow; i < rows.length; i++){
 
     items.push({
-        product: uploadedRows[i][0],
-        price: ""
+        product: rows[i][0],
+        price: rows[i][1] || ""
     });
 
 }
@@ -971,24 +981,26 @@ appData = {
 } else {
 
 const startRow =
-    ignoreHeader ? 1 : 0;
+    mode === "file" && ignoreHeader
+        ? 1
+        : 0;
 
-for(let i = startRow; i < uploadedRows.length; i++){
+for(let i = startRow; i < rows.length; i++){
 
-    const cols = uploadedRows[i];
+    const cols = rows[i];
 
-        const presente =
-            (cols[1] || "no")
-            .toString()
-            .trim()
-            .toLowerCase();
+    const presente =
+        (cols[1] || "no")
+        .toString()
+        .trim()
+        .toLowerCase();
 
-        participants.push({
-            name: cols[0],
-            present: presente === "yes"
-        });
+    participants.push({
+        name: cols[0],
+        present: presente === "yes"
+    });
 
-    }
+}
 
     appData = {
 
@@ -1163,6 +1175,7 @@ document
             document.getElementById(
                 "participantsText"
             ).value.trim();
+			
 
         const manualParticipants =
             manualText
@@ -1226,7 +1239,9 @@ document
 let html = "";
 
 const startRow =
-    ignoreHeader ? 1 : 0;
+    mode === "file" && ignoreHeader
+        ? 1
+        : 0;
 
 for(let i = startRow; i < uploadedRows.length; i++){
 
