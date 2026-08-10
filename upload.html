@@ -380,6 +380,7 @@ margin-bottom:20px;
     <div class="template" data-template="inspection">
         📋 Date List
     </div>
+
 </div>
 
 <!-- Options -->
@@ -931,62 +932,30 @@ if (
 
     return;
 }
-participants = [];
-items = [];
+const mode =
+    document.querySelector(
+        'input[name="inputMode"]:checked'
+    ).value;
+
+if(mode === "file"){
+    participants = [];
+    items = [];
+}
+
 let appData;
 
 if(selectedTemplate === "pricelist"){
 
-    const mode =
-        document.querySelector(
-            'input[name="inputMode"]:checked'
-        ).value;
+const startRow =
+    ignoreHeader ? 1 : 0;
 
-    if(mode === "manual"){
+for(let i = startRow; i < uploadedRows.length; i++){
 
-        items = document
-            .getElementById("participantsText")
-            .value
-            .split(/[\n,]+/)
-            .map(p => p.trim())
-            .filter(p => p)
-            .map(p => ({
-                product: p,
-                price: ""
-            }));
+    items.push({
+        product: uploadedRows[i][0],
+        price: ""
+    });
 
-    } else {
-
-        const startRow =
-            ignoreHeader ? 1 : 0;
-
-        for(let i = startRow; i < uploadedRows.length; i++){
-
-            items.push({
-                product: uploadedRows[i][0],
-                price: ""
-            });
-
-        }
-
-    }
-
-    appData = {
-
-        title:
-            document.getElementById("appTitle").value,
-
-        items: items,
-
-        currency:
-            document.querySelector(
-                'input[name="currency"]:checked'
-            ).value,
-
-        showDate:
-            document.getElementById("showDate").checked
-
-    };
 }
 
 appData = {
@@ -1008,12 +977,14 @@ appData = {
 
 } else {
 
-const startRow =
-    ignoreHeader ? 1 : 0;
+if(mode === "file"){
 
-for(let i = startRow; i < uploadedRows.length; i++){
+    const startRow =
+        ignoreHeader ? 1 : 0;
 
-    const cols = uploadedRows[i];
+    for(let i = startRow; i < uploadedRows.length; i++){
+
+        const cols = uploadedRows[i];
 
         const presente =
             (cols[1] || "no")
@@ -1027,6 +998,29 @@ for(let i = startRow; i < uploadedRows.length; i++){
         });
 
     }
+
+}
+
+    appData = {
+
+        title:
+            document.getElementById("appTitle").value,
+
+        participants:
+            participants,
+
+        showTotal:
+            document.getElementById("showTotal").checked,
+
+        showPresent:
+            document.getElementById("showPresent").checked,
+
+        showDate:
+            document.getElementById("showDate").checked
+
+    };
+
+}
 
     appData = {
 
