@@ -740,7 +740,17 @@ async function loadUser() {
         .eq("id", currentUser.id)
         .single();
 
-    currentProfile = profile;
+	currentProfile = profile;
+
+	if (!currentProfile) {
+	
+		currentProfile = {
+			id: currentUser.id,
+			email: currentUser.email,
+			plan: "free"
+			};
+	
+	}
 
     console.log("USER:", currentUser);
     console.log("PROFILE:", currentProfile);
