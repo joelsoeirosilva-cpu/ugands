@@ -744,7 +744,7 @@ async function loadUser() {
 
 	if (!currentProfile) {
 	
-		currentProfile = {
+		const newProfile = {
 			id: currentUser.id,
 			email: currentUser.email,
 			plan: "free",
