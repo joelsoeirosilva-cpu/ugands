@@ -747,9 +747,18 @@ async function loadUser() {
 		currentProfile = {
 			id: currentUser.id,
 			email: currentUser.email,
-			plan: "free"
+			plan: "free",
+			account_type: "personal"
 			};
 	
+	}
+	
+	const { error: insertError } = await db
+	.from ("profiles")
+	.insert([newProfile]);
+	
+	if (!insertError){
+	currentProfile = newProfile;
 	}
 
     console.log("USER:", currentUser);
