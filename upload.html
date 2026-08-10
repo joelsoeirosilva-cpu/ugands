@@ -381,6 +381,7 @@ margin-bottom:20px;
         📋 Date List
     </div>
 
+
 </div>
 
 <!-- Options -->
@@ -1011,10 +1012,7 @@ for(let i = startRow; i < uploadedRows.length; i++){
 }
 
 const shareToken = crypto.randomUUID();
-console.log("MODE:", mode);
-console.log("PARTICIPANTS:", participants);
-console.log("ITEMS:", items);
-console.log("APPDATA:", appData);
+
 const expiresAt =
     currentProfile.plan === "pro"
         ? new Date(
