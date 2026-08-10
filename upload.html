@@ -979,6 +979,62 @@ appData = {
 
 };
 
+}else if(selectedTemplate === "inventory"){
+
+    const startRow =
+        mode === "file" && ignoreHeader
+            ? 1
+            : 0;
+
+    for(let i = startRow; i < rows.length; i++){
+
+        items.push({
+            item: rows[i][0],
+            quantity: rows[i][1] || 0
+        });
+
+    }
+
+    appData = {
+
+        title:
+            document.getElementById("appTitle").value,
+
+        items: items,
+
+        showDate:
+            document.getElementById("showDate").checked
+
+    };
+
+}else if(selectedTemplate === "inspection"){
+
+    const startRow =
+        mode === "file" && ignoreHeader
+            ? 1
+            : 0;
+
+    for(let i = startRow; i < rows.length; i++){
+
+        items.push({
+            item: rows[i][0],
+            date: rows[i][1] || ""
+        });
+
+    }
+
+    appData = {
+
+        title:
+            document.getElementById("appTitle").value,
+
+        items: items,
+
+        showDate:
+            document.getElementById("showDate").checked
+
+    };
+
 } else {
 
 const startRow =
