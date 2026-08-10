@@ -37,6 +37,10 @@ body{
     margin-bottom:20px;
 }
 
+.logo-image{
+    height:180px;
+}
+
 .card{
     background:#f3f4f6;
     border:1px solid #e5e7eb;
@@ -202,6 +206,20 @@ input[type=file]{
     }
 
 }
+
+@media(max-width:768px){
+
+    .logo-image{
+        height:90px;
+    }
+
+	.card{
+    padding:25px;
+}
+	.upload-box{
+    padding:25px;
+}
+}
 </style>
 </head>
 
@@ -211,11 +229,11 @@ input[type=file]{
 
 <div class="logo">
 
-    <img
-        src="logo.png"
-        alt="UGANDS"
-        style="height:180px;"
-    >
+<img
+    class="logo-image"
+    src="logo.png"
+    alt="UGANDS"
+>
 
 </div>
 
