@@ -919,14 +919,19 @@ if(manualText && !continueGeneration){
 
 }
 
+const totalRecords =
+    uploadedRows.length -
+    (ignoreHeader ? 1 : 0);
+
 if (
-    participants.length > 10 &&
+    totalRecords > 10 &&
     !continueGeneration &&
     (
         !currentProfile ||
         currentProfile.plan !== "pro"
     )
-) {
+)
+{
 
     paywallModal.style.display = "flex";
 
@@ -1090,9 +1095,24 @@ templates[0].classList.add("selected");
 
 continueFreeBtn.addEventListener("click", () => {
 
-    console.log("CONTINUE FREE CLICKED");
+    const ignoreHeader =
+        document.getElementById(
+            "ignoreHeader"
+        ).checked;
 
-    participants = participants.slice(0, 10);
+    if(ignoreHeader){
+
+        uploadedRows = [
+            uploadedRows[0],
+            ...uploadedRows.slice(1, 11)
+        ];
+
+    } else {
+
+        uploadedRows =
+            uploadedRows.slice(0, 10);
+
+    }
 
     continueGeneration = true;
 
