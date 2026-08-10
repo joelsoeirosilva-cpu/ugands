@@ -911,9 +911,10 @@ const showDate =
 		
 
 const date =
-    template === "attendance"
-        ? document.getElementById("attendanceDate").value
-        : "";
+    window.appData.attendanceDate ||
+    document.getElementById("attendanceDate")?.value ||
+    "";
+
 
     const presentCount =
         participants.filter(p => p.present).length;
