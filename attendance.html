@@ -958,6 +958,21 @@ rows: items.map(item => ({
     };
 
 }
+else if(template === "inventory"){
+
+    pdfData = {
+
+        header1: "Item",
+        header2: "Quantity",
+
+        rows: items.map(item => ({
+            col1: item.item,
+            col2: item.quantity || "0"
+        }))
+
+    };
+
+}
     const title = window.appTitle || "List Tracker";
 const showTotal =
     template === "attendance"
