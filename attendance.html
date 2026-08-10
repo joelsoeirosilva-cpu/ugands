@@ -789,24 +789,33 @@ document
 const { data } =
     await db.auth.getSession();
 
-const userId =
-    data.session.user.id;
+if (!data.session) {
 
-const { data: profile } = await db
-    .from("profiles")
-    .select("plan")
-    .eq("id", userId)
-    .single();
+    pdfMode = "branded";
 
-if (
-    profile?.plan === "pro" &&
-    pdfMode !== "professional" &&
-    pdfMode !== "branded"
-) {
+} else {
 
-    pdfModal.style.display = "flex";
+    const userId =
+        data.session.user.id;
 
-    return;
+    const { data: profile } = await db
+        .from("profiles")
+        .select("plan")
+        .eq("id", userId)
+        .single();
+
+    if (
+        profile?.plan === "pro" &&
+        pdfMode !== "professional" &&
+        pdfMode !== "branded"
+    ) {
+        pdfModal.style.display = "flex";
+        return;
+    }
+
+    if (profile?.plan !== "pro" && !pdfMode) {
+        pdfMode = "branded";
+    }
 }
 
 document.getElementById(
