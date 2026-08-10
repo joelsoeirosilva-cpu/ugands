@@ -1037,6 +1037,22 @@ else if(template === "inventory"){
     };
 
 }
+else if(template === "inspection"){
+
+    pdfData = {
+
+        header1: "Item",
+        header2: "Date",
+
+        rows: items.map(item => ({
+            col1: item.item,
+            col2: item.date || ""
+        }))
+
+    };
+
+}
+
     const title = window.appTitle || "List Tracker";
 const showTotal =
     template === "attendance"
