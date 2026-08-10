@@ -421,6 +421,7 @@ items.forEach((item, index) => {
                 value="${item.price}"
                 placeholder="0.00"
                 onchange="updatePrice(${index}, this.value)"
+				${window.isReadOnly ? "disabled" : ""}
                 style="
                     width:120px;
                     padding:8px;
@@ -468,6 +469,7 @@ items.forEach((item, index) => {
             type="number"
             value="${item.quantity}"
             onchange="updateQuantity(${index}, this.value)"
+			${window.isReadOnly ? "disabled" : ""}
             style="
                 width:120px;
                 padding:8px;
@@ -505,6 +507,7 @@ items.forEach((item, index) => {
             type="date"
             value="${item.date || ""}"
             onchange="updateInspectionDate(${index}, this.value)"
+			${window.isReadOnly ? "disabled" : ""}
             style="
                 width:160px;
                 padding:8px;
@@ -613,6 +616,8 @@ const shareMode =
 
 const isReadOnly =
     shareMode === "readonly";
+
+window.isReadOnly = isReadOnly;
 
 let query = db
     .from("apps")
