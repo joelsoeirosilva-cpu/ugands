@@ -1240,43 +1240,26 @@ document
                 .map(name => name.trim())
                 .filter(name => name);
 
-        let html = `
-        <h3>Attendance List</h3>
-        <div style="max-width:500px;margin:auto;">
-        `;
+let html = `
+<h3>Data Preview</h3>
+<div style="max-width:500px;margin:auto;">
+`;
 
-        manualParticipants.forEach(name => {
+manualParticipants.forEach(name => {
 
-            html += `
-            <div style="
-                display:flex;
-                justify-content:space-between;
-                align-items:center;
-                background:white;
-                padding:15px;
-                margin-bottom:10px;
-                border-radius:10px;
-                border:1px solid #ddd;
-            ">
+    html += `
+    <div style="
+        background:white;
+        padding:15px;
+        margin-bottom:10px;
+        border-radius:10px;
+        border:1px solid #ddd;
+    ">
+        ${name}
+    </div>
+    `;
 
-                <strong>${name}</strong>
-
-                <button
-                    style="
-                    width:70px;
-                    border:none;
-                    border-radius:8px;
-                    padding:8px;
-                    color:white;
-                    background:#dc2626;
-                    ">
-                    NO
-                </button>
-
-            </div>
-            `;
-
-        });
+});
 
         document.getElementById(
             "previewTitle"
